@@ -1,11 +1,14 @@
+<!-- Connecting the Database -->
+<?php include "../database/db.php";?>
+
 <!-- Including Header -->
-<?php include "includes/header.php"; ?>
+<?php include "includes/admin_header.php"; ?>
 
 <!-- Navigation -->
-<?php include "includes/navigation.php"; ?>
+<?php include "includes/admin_navigation.php"; ?>
 
 <!-- Content -->
-<?php include "includes/content.php"; ?>
+<?php include "includes/admin_content.php"; ?>
 
 <!-- Footer -->
-<?php include "includes/footer.php"; ?>
+<?php include "includes/admin_footer.php"; ?>

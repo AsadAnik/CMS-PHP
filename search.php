@@ -1,5 +1,5 @@
 <!-- Make the Database connection here -->
-<?php include "includes/db.php"; ?>
+<?php include "database/db.php"; ?>
 <?php include "includes/header.php"; ?>
 <?php include "includes/navigation.php"; ?>
 

@@ -1,5 +1,5 @@
 <!-- Database -->
-<?php include "includes/db.php";?>
+<?php include "database/db.php";?>
 
 <!-- Header of HTML Template -->
 <?php include "includes/header.php"; ?>
