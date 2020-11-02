@@ -2,16 +2,16 @@
 <?php include "database/db.php";?>
 
 <!-- Header of HTML Template -->
-<?php include "includes/header.php"; ?>
+<?php include "includes/common/header.php"; ?>
 
 <!-- Navigation -->
-<?php include "includes/navigation.php"; ?>
+<?php include "includes/common/navigation.php"; ?>
 
 <!-- Content of Block Posting -->
 <?php include "includes/content.php"; ?>
 
 <!-- Sidebar Of Content -->
-<?php include "includes/sidebar.php"; ?>
+<?php include "includes/common/sidebar.php"; ?>
 
 <!-- Footer -->
-<?php include "includes/footer.php"; ?>
+<?php include "includes/common/footer.php"; ?>

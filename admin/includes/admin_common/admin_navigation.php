@@ -82,7 +82,7 @@
                     </li>
 
                     <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Categories</a>
+                        <a href="category.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
                     </li>
 
                     <li class="active">

@@ -8,7 +8,7 @@
 <?php include "includes/admin_common/admin_navigation.php"; ?>
 
 <!-- Content -->
-<?php include "includes/admin_content.php"; ?>
+<?php include "includes/admin_category.php"; ?>
 
 <!-- Footer -->
 <?php include "includes/admin_common/admin_footer.php"; ?>
