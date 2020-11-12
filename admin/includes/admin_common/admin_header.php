@@ -1,3 +1,18 @@
+<?php 
+///Created Page rendering buffer to contitune with delete items on Categories in Same load Buffer...
+    ob_start();
+
+    //Setting up the session....
+    session_start();
+
+    //Cheking Session User Role Isset..
+    // if(isset($_SESSION['user_role'])){
+
+    // }else{
+    //     header("location: ../index.php");
+    // }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
