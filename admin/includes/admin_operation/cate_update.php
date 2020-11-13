@@ -13,6 +13,7 @@
     }
 ?>
 
+<!-- Form  -->
 <form method="post">
     <!-- Update/Edit Caegories -->
     <div class="form-group">
