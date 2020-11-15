@@ -6,14 +6,61 @@
         $post_category_id = $_POST['category-id'];
         $post_status = $_POST['status'];
         
-        $post_image = $_FILES['image']['name'];
-        $post_image_temp = $_FILES['image']['tmp-name'];
+        // $post_image = $_FILES['image']['name'];
+        // $post_image_temp = $_FILES['image']['tmp_name'];
 
         $post_tag = $_POST['tags'];
         $post_content = $_POST['content'];
 
         //Make Local Image to our  project/Application here...
-        move_uploaded_file($post_image_temp, "../../images/$post_image");
+        // move_uploaded_file($post_image_temp, "../images/$post_image");
+
+
+        ///Making Operation for Image Uploading...
+        //Creating File Uploading System with PHP..
+        $file = $_FILES['image'];
+
+        $file_name = $file['name'];
+        $file_temp = $file['tmp_name'];
+        $file_type = $file['type'];
+        $file_size = $file['size'];
+        $file_error = $file['error'];
+        
+        // print_r($file);
+
+        //Do Ops here..
+        $file_extension = explode('.', $file_name);
+        $real_extension = strtolower(end($file_extension));
+
+        //Allowing Format of File to upload...
+        $allowable = array('jpg', 'png', 'jpeg');
+
+        ///Decition making now...
+        if(in_array($real_extension, $allowable)){
+            if($file_error === 0){
+                if($file_size < 1000000){
+
+                    $file_name_new = uniqid('', true) . "." . $real_extension;
+                    $file_destination = '../images/'.$file_name_new;
+
+                    //Move FIle to Local Temporary storage to server...
+                    move_uploaded_file($file_temp, $file_destination);
+
+                    //make redirect with header..
+                    header("Location: posts.php?source=add_post");
+
+                }else{
+                    echo "Your File is too Big!";
+                }
+
+            }else{
+                echo "There is an ERR! when try to Fetch Files";
+            }
+
+        }else{
+            echo "You can not upload files of this type";
+        }
+       
     }
 ?>
 
