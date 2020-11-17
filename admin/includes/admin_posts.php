@@ -14,6 +14,10 @@
                             case "add_post":
                                 include "admin_operation/post_ops/post_create.php";
                             break;
+
+                            case "edit_post":
+                                include "admin_operation/post_ops/post_update.php";
+                            break;
                         }
 
                     }else{

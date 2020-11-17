@@ -12,8 +12,10 @@
         $post_date = date('d-m-y');
         $post_tag = $_POST['tags'];
         $post_content = $_POST['content'];
+        $post_comment_count = 4;
 
         //Make Local Image to our  project/Application here...
+        ///Way to upload Image/Files...
         move_uploaded_file($post_image_temp, "../images/$post_image");
 
 
@@ -65,8 +67,8 @@
 
 
         ///INSERTING into the DATABASE...
-        $query = "INSERT INTO `posts` (post_category_id, post_title, post_author, post_date, post_image, post_tags, post_content, post_status) ";
-        $query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', '{$post_date}', '{$post_image}','{$post_tag}' ,'{$post_content}', '{$post_status}')";
+        $query = "INSERT INTO `posts` (post_category_id, post_title, post_author, post_date, post_image, post_tags, post_content, post_status, post_comment_count) ";
+        $query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}','{$post_tag}' ,'{$post_content}', '{$post_status}', '{$post_comment_count}')";
 
         //Make query for all data to submit on database..
         $make_query = mysqli_query($connection, $query);

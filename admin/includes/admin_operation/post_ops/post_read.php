@@ -21,11 +21,11 @@
                         <th>Tags</th>
                         <th>Comments</th>
                         <th>Date</th>
+                        <th>Operation</th>
                     </tr>
                 </thead>
 
                 <tbody>
-
                     <!------- Makes View All Posts from database fetching ------->
                     <?php
                     $query = "SELECT * FROM `posts`";
@@ -46,7 +46,7 @@
                         $post_category_id = $fetch_all_post['post_category_id'];
                         $post_tags = $fetch_all_post['post_tags'];
                         $post_status = $fetch_all_post['post_status'];
-                        $post_comment = $fetch_all_post['post_content'];
+                        $post_comment_count = $fetch_all_post['post_comment_count'];
 
                     ?>
                         <tr>
@@ -59,8 +59,13 @@
                                 <img src="../images/<?php echo $post_image; ?>" alt="Image" class="img-thumbnail" width="100" height="100">
                             </td>
                             <td><?php echo $post_tags; ?></td>
-                            <td><?php echo $post_comment; ?></td>
+                            <td><?php echo $post_comment_count;?></td>
                             <td><?php echo $post_date; ?></td>
+                            <td>
+                                <!-- Make Post DELETE from here -->
+                                <?php include "post_delete.php";?>
+                                <a href="posts.php?deleteId=<?php echo $post_id;?>" name="post-delete-btn" class="btn btn-xs btn-danger">DELETE</a>
+                            </td>
                         </tr>
                     <?php
                     }

@@ -10,7 +10,7 @@ if (isset($_GET['deleteId'])) {
 
     ///checking the query...
     if (!$delete_query) {
-        die("ERROE! when try to Delete categories title " . mysqli_errno($delete_query));
+        die("ERROE! when try to Delete categories title " . mysqli_error($connection));
     }
 }
 ?>
