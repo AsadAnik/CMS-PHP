@@ -9,7 +9,7 @@
         $post_image = $_FILES['image']['name'];
         $post_image_temp = $_FILES['image']['tmp_name'];
 
-        $post_date = date('d-m-y');
+        // $post_date = date('d-m-y');
         $post_tag = $_POST['tags'];
         $post_content = $_POST['content'];
         $post_comment_count = 4;

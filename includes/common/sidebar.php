@@ -27,7 +27,7 @@
 
         ///checking the connection..
         if(!$all_category){
-            die("GET ERROR! when Sidebars Categories Data Query!".mysqli_errno($all_category));
+            die("GET ERROR! when Sidebars Categories Data Query!".mysqli_error($connection));
         }
      ?>
      <div class="well">
@@ -39,7 +39,7 @@
                         while($category = mysqli_fetch_assoc($all_category)){
                             $category_title = $category['cat_title'];
                     ?>
-                            <li><a href="#"><?php echo $category_title;?></a></li>
+                        <li><a href="#"><?php echo $category_title;?></a></li>
                     <?php        
                         }
                     ?>
