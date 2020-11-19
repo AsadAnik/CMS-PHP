@@ -62,6 +62,9 @@
                             <td><?php echo $post_comment_count;?></td>
                             <td><?php echo $post_date; ?></td>
                             <td>
+                                <!-- Make Post EDIT from here -->
+                                <a href="posts.php?source=update_post&editId=<?php echo $post_id;?>" class="btn btn-xs btn-primary">EDIT</a>
+
                                 <!-- Make Post DELETE from here -->
                                 <?php include "post_delete.php";?>
                                 <a href="posts.php?deleteId=<?php echo $post_id;?>" name="post-delete-btn" class="btn btn-xs btn-danger">DELETE</a>
