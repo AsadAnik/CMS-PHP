@@ -1,6 +1,11 @@
 <?php
+///Checking CategoryId which is came out from category...
+if(isset($_GET['categoryId'])){
+    $category_id = $_GET['categoryId'];
+}
+
 ///Select All From Database here..
-$query = "SELECT * FROM `posts`";
+$query = "SELECT * FROM `posts` WHERE `post_category_id` = {$category_id}";
 $select_all_posts = mysqli_query($connection, $query);
 
 //Checking the Query in Content...

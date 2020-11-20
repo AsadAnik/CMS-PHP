@@ -1,95 +1,66 @@
-<div class="container">
+<!-- PHP to Grabe All of the information to specific POST title with -->
+<?php 
+///Code...
+    if(isset($_GET['postId'])){
+        $post_id = $_GET['postId'];
+    }
 
+    ///Querieing Data...
+    $query = "SELECT * FROM `posts` WHERE post_id = {$post_id}";
+    $result_query = mysqli_query($connection, $query);
+
+    //Checking the Query here..
+    if(!$result_query){
+        die("GET ERR! When try to make query to fetch all post items for Specific 1. POST view".mysqli_error($connection));
+    }
+
+    //Fetching Loop throw the data...
+    while($fetch_post_item = mysqli_fetch_assoc($result_query)){
+        $post_title = $fetch_post_item['post_title'];
+        $post_author = $fetch_post_item['post_author'];
+        $post_date = $fetch_post_item['post_date'];
+        $post_image = $fetch_post_item['post_image'];
+        $post_content = $fetch_post_item['post_content'];
+    }
+?>
+
+<!------- HTML Template ------->
+<div class="container">
 <div class="row">
 
     <!-- Blog Post Content Column -->
     <div class="col-lg-8">
-
         <!-- Blog Post -->
-
         <!-- Title -->
-        <h1>Blog Post Title</h1>
+        <h1>
+            <?php echo $post_title;?>
+        </h1>
 
         <!-- Author -->
         <p class="lead">
-            by <a href="#">Start Bootstrap</a>
+            by <a href="#"><?php echo $post_author;?></a>
         </p>
 
         <hr>
 
         <!-- Date/Time -->
-        <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+        <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date;?></p>
 
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+        <img class="img-responsive" src="images/<?php echo $post_image;?>" alt="Post Image">
 
         <hr>
 
         <!-- Post Content -->
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+        <p class="lead">
+            <?php echo $post_content;?>
+        </p>
 
         <hr>
 
-        <!-- Blog Comments -->
-
-        <!-- Comments Form -->
-        <div class="well">
-            <h4>Leave a Comment:</h4>
-            <form role="form">
-                <div class="form-group">
-                    <textarea class="form-control" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-
-        <hr>
-
-        <!-- Posted Comments -->
-
-        <!-- Comment -->
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64" alt="">
-            </a>
-            <div class="media-body">
-                <h4 class="media-heading">Start Bootstrap
-                    <small>August 25, 2014 at 9:30 PM</small>
-                </h4>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-        </div>
-
-        <!-- Comment -->
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64" alt="">
-            </a>
-            <div class="media-body">
-                <h4 class="media-heading">Start Bootstrap
-                    <small>August 25, 2014 at 9:30 PM</small>
-                </h4>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                <!-- Nested Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Nested Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
-                <!-- End Nested Comment -->
-            </div>
-        </div>
+        <!------ Blog Comments ------>
+        <?php include "common/comments.php";?>
 
     </div>
