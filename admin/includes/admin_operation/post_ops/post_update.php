@@ -5,6 +5,7 @@ if (isset($_GET['editId'])) {
     $edit_id = $_GET['editId'];
 }
 
+///Make Query to get fetching all posts from specific Get EditId URL...
 $query = "SELECT * FROM `posts` WHERE `post_id` = $edit_id";
 $get_specific_post = mysqli_query($connection, $query);
 
@@ -13,8 +14,8 @@ if (!$get_specific_post) {
     die("GET ERR! when try to make query for specific post to Show on value attribute in Admin " . mysqli_error($connection));
 }
 
-///Looping Fetched...
-while ($fetch_specific_post = mysqli_fetch_assoc($get_specific_post)) { 
+///Looping To Fetch Data for all Form Value Adding Data...
+while ($fetch_specific_post = mysqli_fetch_assoc($get_specific_post)) {
     $post_title = $fetch_specific_post['post_title'];
     $post_author = $fetch_specific_post['post_author'];
     $post_date = $fetch_specific_post['post_date'];
@@ -26,9 +27,9 @@ while ($fetch_specific_post = mysqli_fetch_assoc($get_specific_post)) {
     $post_content = $fetch_specific_post['post_content'];
 }
 
+
 ///Updating/Editing POST...
 if (isset($_POST['update-post'])) {
-    echo $edit_id;
 
     $post_title = $_POST['title'];
     $post_author = $_POST['author'];
@@ -45,6 +46,16 @@ if (isset($_POST['update-post'])) {
     //Make Local Image to our  project/Application here...
     ///Way to upload Image/Files...
     move_uploaded_file($post_image_temp, "../images/$post_image");
+
+    ///Image Impty So Make Fetch Image from Database Again..
+    if (empty($post_image)) {
+        $query_image = "SELECT * FROM `posts` WHERE post_id = {$edit_id}";
+        $make_image_query = mysqli_query($connection, $query_image);
+
+        while ($row_image = mysqli_fetch_assoc($make_image_query)) {
+            $post_image = $row_image['post_image'];
+        }
+    }
 
     //Making Query here...
     $query = "UPDATE `posts` SET ";
@@ -73,6 +84,7 @@ if (isset($_POST['update-post'])) {
 <h1 class="page-header">
     Post
     <small>Editing</small>
+    <a href="posts.php" class="btn btn-primary">View All Posts</a>
 </h1>
 
 <!-- Add Categories HTML -->
@@ -81,7 +93,7 @@ if (isset($_POST['update-post'])) {
         <!-- Add Category Column -->
         <div class="col-xs-12">
             <!-- Form Action takes to update Post -->
-            <form action="posts.php?source=update_post" method="POST" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <!-- Title -->
                 <div class="form-group">
                     <label for="title">Post Title</label>
@@ -99,6 +111,7 @@ if (isset($_POST['update-post'])) {
                     <label for="category-select">Category Select</label>
                     <br>
                     <select name="category-select" class="form-control">
+                            <option value="0">Select Category To Update</option>
                         <?php
                         //Categories Needs To View All From categories Table...
                         $query_cat = "SELECT * FROM `categories`";
@@ -114,8 +127,9 @@ if (isset($_POST['update-post'])) {
                             $cat_id = $fetch_all_category['cat_id'];
                             $cat_title = $fetch_all_category['cat_title'];
                         ?>
-                            <option value="<?php echo $cat_id;?>"><?php echo $cat_title; ?></option>
-                        <?php } ?>
+                            <option value="<?php echo $cat_id; ?>"><?php echo $cat_title; ?></option>
+                        <?php
+                        } ?>
                     </select>
                 </div>
 

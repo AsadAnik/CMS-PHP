@@ -53,7 +53,19 @@
                             <td><?php echo $post_id; ?></td>
                             <td><?php echo $post_author; ?></td>
                             <td><?php echo $post_title; ?></td>
-                            <td><?php echo $post_category_id; ?></td>
+                            <td>
+                                <?php
+                                ///Read Post with Category Fetching All Categories to Add Categories...
+                                    $query_category = "SELECT * FROM `categories` WHERE cat_id = {$post_category_id}";
+                                    $category_query_make = mysqli_query($connection, $query_category);
+
+                                    //Fetching All Categories to get loop throw..
+                                    while($fetch_category = mysqli_fetch_assoc($category_query_make)){
+                                        $category = $fetch_category['cat_title'];
+                                    }
+                                    echo $category;
+                                ?>
+                            </td>
                             <td><?php echo $post_status; ?></td>
                             <td>
                                 <img src="../images/<?php echo $post_image; ?>" alt="Image" class="img-thumbnail" width="100" height="100">

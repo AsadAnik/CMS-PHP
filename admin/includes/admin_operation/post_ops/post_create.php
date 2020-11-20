@@ -100,8 +100,28 @@
 
                 <!-- Category Id -->
                 <div class="form-group">
-                    <label for="category-id">Post Category Id</label>
-                    <input type="text" class="form-control" placeholder="Category ID" name="category-id">
+                    <label for="category-id">Post Category</label>
+                    <select name="category-id" id="category-id" class="form-control">
+                            <option value="0">Select Category</option>
+                        <?php 
+                            $category_query = "SELECT * FROM `categories`";
+                            $query_make_cat = mysqli_query($connection, $category_query);
+
+                            ///Checking The Category Id here..
+                            if(!$query_make_cat){
+                                die("ERR! when try to make query categories all to add post".mysqli_error($connection));
+                            }
+
+                            //Loop throw to fetching data from here..
+                            while($fetch_category = mysqli_fetch_assoc($query_make_cat)){
+                                $cat_id = $fetch_category['cat_id'];
+                                $cat_title = $fetch_category['cat_title'];
+                        ?>
+                            <option value="<?php echo $cat_id;?>"><?php echo $cat_title;?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
                 </div>
 
                 <!-- Author -->
