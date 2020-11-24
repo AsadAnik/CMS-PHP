@@ -32,7 +32,7 @@ if (!$select_all_posts) {
                 $post_author = $posts['post_author'];
                 $post_date = $posts['post_date'];
                 $post_image = $posts['post_image'];
-                $post_content = $posts['post_content'];
+                $post_content = substr($posts['post_content'], 0, 200);
             ?>
 
                 <h2>

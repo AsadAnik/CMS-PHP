@@ -38,9 +38,9 @@ if (!$select_all_posts) {
                 $post_date = $posts['post_date'];
                 $post_image = $posts['post_image'];
                 $post_content = $posts['post_content'];
-            ?>
-
-                <h2>
+            ?>   
+                    
+                 <h2>
                     <a href="post.php?postId=<?php echo $post_id;?>"><?php echo $post_title; ?></a>
                 </h2>
                 <p class="lead">
@@ -52,9 +52,8 @@ if (!$select_all_posts) {
                 <hr>
                 <p><?php echo $post_content; ?></p>
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
                 <hr>
-
+                
             <?php } ?>
 
             <!-- Pager -->
