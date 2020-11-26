@@ -29,8 +29,9 @@
                     ///Linking Categories from Database...
                     while($catagory = mysqli_fetch_assoc($catagories_all_data)){
                         $title_link = $catagory['cat_title'];
+                        $id_link = $catagory['cat_id'];
 
-                        echo "<li><a href='#'>$title_link</a></li>";
+                        echo "<li><a href='category.php?categoryId=$id_link'>$title_link</a></li>";
                     }
                 ?>
                 <li><a href="admin/index.php" class="text-capitalize">admin panel</a></li>

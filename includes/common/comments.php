@@ -1,6 +1,6 @@
  <!-- PHP to Create Comment To Database -->
  <?php
-    //Code..
+    //Code To Create Comments from Here..
     if (isset($_POST['sent-comment'])) {
         $post_id = $_GET['postId'];
         $author = $_POST['comments_author'];
@@ -17,9 +17,20 @@
             if (!$comments_query) {
                 die("Get ERR! when try to create comment of post. " . mysqli_error($connection));
             }
+
+            //Counting Comments When Make Sent Comments...
+            ///Make comments_counting...
+            $counts_query = "UPDATE `posts` SET post_comment_count = post_comment_count + 1 ";
+            $counts_query .= "WHERE `post_id` = {$post_id}";
+            $posts_update = mysqli_query($connection, $counts_query);
+
+            ///Checking query here...
+            if (!$posts_update) {
+                die("Get ERR! when try to make query in posts comments_count " . mysqli_error($connection));
+            }
         }
     }
-    ?>
+?>
 
  <!-- Comments Form -->
  <div class="well">
@@ -48,42 +59,51 @@
  <hr>
 
  <!-- Posted Comments -->
+ <!-- Code To Read Comments From Here -->
+ <?php
+    $query = "SELECT * FROM `comments` WHERE `comments_post_id` = {$post_id} ";
+    $query .= "AND `comments_status` = 'approved'";
+    $make_query_view = mysqli_query($connection, $query);
 
- <!-- Comment -->
- <div class="media">
-     <a class="pull-left" href="#">
-         <img class="media-object" src="http://placehold.it/64x64" alt="">
-     </a>
-     <div class="media-body">
-         <h4 class="media-heading">Start Bootstrap
-             <small>August 25, 2014 at 9:30 PM</small>
-         </h4>
-         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-     </div>
- </div>
+    ///Checking Query From Here...
+    if (!$make_query_view) {
+        die("GET ERR! when try to make query into comments all view section " . mysqli_error($connection));
+    }
 
- <!-- Comment -->
- <div class="media">
-     <a class="pull-left" href="#">
-         <img class="media-object" src="http://placehold.it/64x64" alt="">
-     </a>
-     <div class="media-body">
-         <h4 class="media-heading">Start Bootstrap
-             <small>August 25, 2014 at 9:30 PM</small>
-         </h4>
-         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-         <!-- Nested Comment -->
-         <div class="media">
-             <a class="pull-left" href="#">
-                 <img class="media-object" src="http://placehold.it/64x64" alt="">
-             </a>
-             <div class="media-body">
-                 <h4 class="media-heading">Nested Start Bootstrap
-                     <small>August 25, 2014 at 9:30 PM</small>
-                 </h4>
-                 Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-             </div>
+    //Fetching All Comments..
+    while ($fetch_comment = mysqli_fetch_assoc($make_query_view)) {
+        $author = $fetch_comment['comments_author'];
+        $date = $fetch_comment['comments_date'];
+        $email = $fetch_comment['comments_email'];
+        $content = $fetch_comment['comments_content'];
+        $status = $fetch_comment['comments_status'];
+    ?>
+     <!-- Comment -->
+     <div class="media">
+         <a class="pull-left" href="#">
+             <img class="media-object" src="http://placehold.it/64x64" alt="">
+         </a>
+         <div class="media-body">
+             <h4 class="media-heading"><?php echo $author; ?>
+                 <small><?php echo $date; ?></small>
+             </h4>
+             <?php echo $content; ?>
          </div>
-         <!-- End Nested Comment -->
      </div>
- </div>
+<?php
+    }
+?>
+
+ <!-- Comment -->
+ <!-- Design of Comments View Without PHP Demo -->
+ <!-- <div class="media">
+     <a class="pull-left" href="#">
+         <img class="media-object" src="http://placehold.it/64x64" alt="">
+     </a>
+     <div class="media-body">
+         <h4 class="media-heading">Start Bootstrap
+             <small>August 25, 2014 at 9:30 PM</small>
+         </h4>
+         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+     </div>
+ </div> -->

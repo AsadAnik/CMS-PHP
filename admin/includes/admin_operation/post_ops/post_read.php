@@ -1,3 +1,4 @@
+<!-- Page For Posts -->
 <h1 class="page-header">
     Posts
     <small>Viewing</small>
@@ -9,7 +10,7 @@
         <!-- Add Category Column -->
         <div class="col-xs-12">
             <table class="table table-bordered table-hover">
-
+                <!----- Table Heading ------>
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -21,10 +22,11 @@
                         <th>Tags</th>
                         <th>Comments</th>
                         <th>Date</th>
-                        <th>Operation</th>
+                        <th colspan="2">Operation</th>
                     </tr>
                 </thead>
 
+                <!------ Table Body ------>
                 <tbody>
                     <!------- Makes View All Posts from database fetching ------->
                     <?php
@@ -47,12 +49,18 @@
                         $post_tags = $fetch_all_post['post_tags'];
                         $post_status = $fetch_all_post['post_status'];
                         $post_comment_count = $fetch_all_post['post_comment_count'];
-
                     ?>
                         <tr>
+                            <!-- Id -->
                             <td><?php echo $post_id; ?></td>
+
+                            <!-- Author -->
                             <td><?php echo $post_author; ?></td>
+
+                            <!-- Title -->
                             <td><?php echo $post_title; ?></td>
+
+                            <!-- Category -->
                             <td>
                                 <?php
                                 ///Read Post with Category Fetching All Categories to Add Categories...
@@ -66,17 +74,32 @@
                                     echo $category;
                                 ?>
                             </td>
+
+                            <!-- Status -->
                             <td><?php echo $post_status; ?></td>
+
+                            <!-- Image -->
                             <td>
                                 <img src="../images/<?php echo $post_image; ?>" alt="Image" class="img-thumbnail" width="100" height="100">
                             </td>
+
+                            <!-- Tags -->
                             <td><?php echo $post_tags; ?></td>
+
+                            <!-- Comments Count -->
                             <td><?php echo $post_comment_count;?></td>
+
+                            <!-- Date -->
                             <td><?php echo $post_date; ?></td>
+
+                            <!-- Edit Operation -->
                             <td>
                                 <!-- Make Post EDIT from here -->
                                 <a href="posts.php?source=update_post&editId=<?php echo $post_id;?>" class="btn btn-xs btn-primary">EDIT</a>
+                            </td>
 
+                            <!-- Delete Operation -->
+                            <td>
                                 <!-- Make Post DELETE from here -->
                                 <?php include "post_delete.php";?>
                                 <a href="posts.php?deleteId=<?php echo $post_id;?>" name="post-delete-btn" class="btn btn-xs btn-danger">DELETE</a>

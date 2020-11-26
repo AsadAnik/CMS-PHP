@@ -45,7 +45,6 @@
                         $comments_email = $fetch_all_comment['comments_email'];
                         $comments_content = $fetch_all_comment['comments_content'];
                         $comments_status = $fetch_all_comment['comments_status'];
-
                     ?>
                         <tr>
                             <!-- Comments ID -->
@@ -59,19 +58,7 @@
 
                             <!-- Comments Email -->
                             <td>
-                                <?php
-                                ///Read Post with Category Fetching All Categories to Add Categories...
-                                // $query_category = "SELECT * FROM `categories` WHERE cat_id = {$post_category_id}";
-                                // $category_query_make = mysqli_query($connection, $query_category);
-
-                                //Fetching All Categories to get loop throw..
-                                // while($fetch_category = mysqli_fetch_assoc($category_query_make)){
-                                //     $category = $fetch_category['cat_title'];
-                                // }
-                                // echo $category;
-
-                                echo $comments_email;
-                                ?>
+                                <?php echo $comments_email; ?>
                             </td>
 
                             <!-- Comments Status -->
@@ -104,14 +91,20 @@
 
                             <!-- Approve Comments -->
                             <td>
-                                <!-- Make Comment DELETE from here -->
-                                <a href="" name="com-approve-btn" class="btn btn-xs btn-success">Approve</a>
+                                <!-- Make Comment Update from here -->
+                                <a href="comments.php?approveId=<?php echo $comments_id;?>" name="com-approve-btn" class="btn btn-xs btn-success">Approve</a>
+
+                                <!-- PHP to make Approve from Admin -->
+                                <?php include "approval_update_comments.php";?>
                             </td>
 
                             <!-- Unapprove Comments -->
                             <td>
-                                <!-- Make Comment DELETE from here -->
-                                <a href="" name="com-unapprove-btn" class="btn btn-xs btn-warning">Unapprove</a>
+                                <!-- Make Comment Update from here -->
+                                <a href="comments.php?unapproveId=<?php echo $comments_id;?>" name="com-unapprove-btn" class="btn btn-xs btn-warning">Unapprove</a>
+
+                                <!-- PHP to make Unapprove from Admin -->
+                                <?php include "approval_update_comments.php";?>
                             </td>
 
                             <!-- Delete Comments -->
