@@ -16,14 +16,14 @@
                         <div class="col-xs-6">
 
                             <!---------- Create/Add Categories from here --------->
-                            <?php include "admin_operation/cate_create.php"; ?>
+                            <?php include "admin_operation/category_ops/cate_create.php"; ?>
 
                             <!----------- Update/Edit Items from here ------------>
                             <?php
                             ///Make Update with query...
                             if (isset($_GET['edit'])) {
                                 $cate_update_id = $_GET['edit'];
-                                include "admin_operation/cate_update.php";
+                                include "admin_operation/category_ops/cate_update.php";
                             }
                             ?>
                         </div>
@@ -32,10 +32,10 @@
                         <div class="col-xs-6">
 
                             <!----- Read Categories for table  ----->
-                            <?php include "admin_operation/cate_read.php";?>
+                            <?php include "admin_operation/category_ops/cate_read.php";?>
 
                             <!------ Delete Categories title ------->
-                            <?php include "admin_operation/cate_delete.php";?>    
+                            <?php include "admin_operation/category_ops/cate_delete.php";?>    
                            
                         </div>
                     </div>
