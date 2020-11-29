@@ -24,7 +24,7 @@
                         <th>Gender</th>
                         <th>Type</th>
                         <th>Date</th>
-                        <th colspan="2">Actions</th>
+                        <th colspan="4" class="text-center">Actions</th>
                     </tr>
                 </thead>
 
@@ -62,7 +62,28 @@
 
                             <!-- Image -->
                             <td>
-                                <img src="../images/profile_img/<?php echo $users_image ;?>" alt="No-Profile-Avatar" class="img img-thumbnail" style="width: 50px; height: 50px; border-radius: 100%">
+                                <?php
+                                    //If there is any profile-img (From Users Database)...
+                                    if($users_image !== ''){
+                                        echo "<img src='../images/profile_img/$users_image' alt='No-Profile-Avatar' class='img img-thumbnail' style='width: 50px; height: 50px; border-radius: 100%'>";
+                                    }
+
+                                    //If there is no any profile-img..
+                                    if($users_image == ''){
+                                        //Male profile..
+                                        if($users_gender == 'Male'){
+                                            echo "<img src='../images/profile_img/default/male.png' alt='No-Profile-Avatar' class='img img-thumbnail' style='width: 50px; height: 50px; border-radius: 100%'>";
+                                        }
+                                        //Female profile..
+                                        if($users_gender == 'Female'){
+                                            echo "<img src='../images/profile_img/default/female.jpeg' alt='No-Profile-Avatar' class='img img-thumbnail' style='width: 50px; height: 50px; border-radius: 100%'>";
+                                        }
+                                        //Other profile..
+                                        if($users_gender == 'Other'){
+                                            echo "<img src='../images/profile_img/default/other.png' alt='No-Profile-Avatar' class='img img-thumbnail' style='width: 50px; height: 50px; border-radius: 100%'>";
+                                        }
+                                    }
+                                ?>
                             </td>
 
                             <!-- FirstName -->
@@ -91,16 +112,26 @@
                             </td>
 
                             <!-- Actions -->
+                            <!-- Make Admin -->
+                            <td>
+                                <a href="" class="btn btn-success btn-xs">Admin</a>
+                            </td>
+
+                            <!-- Make Subscriber/Member -->
+                            <td>
+                                <a href="" class="btn btn-warning btn-xs">Subscriber</a>
+                            </td>
+
                             <!-- EDIT Action -->
                             <td>
-                                <a href="" class="btn btn-primary btn-xs">EDIT</a>
+                                <!-- Users Update their informations here -->
+                                <a href="users.php?source=edit_user&editUserId=<?php echo $users_id;?>" class="btn btn-primary btn-xs">EDIT</a>
                             </td>
 
                             <!-- DELETE Action -->
                             <td>
-                                <!-- Make Post DELETE from here -->
+                                <!-- Make Users DELETE from here -->
                                 <a href="users.php?deleteUserId=<?php echo $users_id; ?>" class="btn btn-xs btn-danger">DELETE</a>
-
                                 <!-- Delete PHP Code.. -->
                                 <?php include "delete_user.php"; ?>
                             </td>

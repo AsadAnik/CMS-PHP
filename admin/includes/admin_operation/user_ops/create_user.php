@@ -18,53 +18,56 @@ if (isset($_POST['publish-post'])) {
 
     ///Checking the Blanks to Send User Data to Database..
     if ($username !== '' && $firstname !== '' && $email !== '' && $password !== '' && $gender !== '' && $age !== '') {
-
+        if ($password !== $re_password) {
+            echo "<h4 class='text-cente text-danger'>Must Need Fill All Forms!</h4>";
+        }
+        
         //Make Local Image to our  project/Application here...
         ///Way to upload Image/Files...
-        // move_uploaded_file($user_image_temp, "../images/$user_image");
+        move_uploaded_file($user_image_temp, "../images/profile_img/$user_image");
 
         ///Another Way to Upload Files With Deept...
         ///Making Operation for Image Uploading...
         //Creating File Uploading System with PHP..
-        $file = $_FILES['profile-img'];
+        // $file = $_FILES['profile-img'];
 
-        $file_name = $file['name'];
-        $file_temp = $file['tmp_name'];
-        $file_type = $file['type'];
-        $file_size = $file['size'];
-        $file_error = $file['error'];
+        // $file_name = $file['name'];
+        // $file_temp = $file['tmp_name'];
+        // $file_type = $file['type'];
+        // $file_size = $file['size'];
+        // $file_error = $file['error'];
 
-        // print_r($file);
+        // // print_r($file);
 
-        //Do Ops here..
-        $file_extension = explode('.', $file_name);
-        $real_extension = strtolower(end($file_extension));
+        // //Do Ops here..
+        // $file_extension = explode('.', $file_name);
+        // $real_extension = strtolower(end($file_extension));
 
-        //Allowing Format of File to upload...
-        $allowable = array('jpg', 'png', 'jpeg');
+        // //Allowing Format of File to upload...
+        // $allowable = array('jpg', 'png', 'jpeg');
 
-        ///Decition making now...
-        if (in_array($real_extension, $allowable)) {
-            if ($file_error === 0) {
-                if ($file_size < 1000000) {
+        // ///Decition making now...
+        // if (in_array($real_extension, $allowable)) {
+        //     if ($file_error === 0) {
+        //         if ($file_size < 1000000) {
 
-                    $file_name_new = uniqid('', true) . "." . $real_extension;
-                    $file_destination = '../images/profile_img/' . $file_name_new;
+        //             $file_name_new = uniqid('', true) . "." . $real_extension;
+        //             $file_destination = '../images/profile_img/' . $file_name_new;
 
-                    //Move FIle to Local Temporary storage to server...
-                    move_uploaded_file($file_temp, $file_destination);
+        //             //Move FIle to Local Temporary storage to server...
+        //             move_uploaded_file($file_temp, $file_destination);
 
-                    //make redirect with header..
-                    header("Location: posts.php?source=add_post");
-                } else {
-                    echo "Your File is too Big!";
-                }
-            } else {
-                echo "There is an ERR! when try to Fetch Files";
-            }
-        } else {
-            echo "You can not upload files of this type";
-        }
+        //             //make redirect with header..
+        //             header("Location: posts.php?source=add_post");
+        //         } else {
+        //             echo "Your File is too Big!";
+        //         }
+        //     } else {
+        //         echo "There is an ERR! when try to Fetch Files";
+        //     }
+        // } else {
+        //     echo "You can not upload files of this type";
+        // }
 
 
         ///INSERTING into the DATABASE...
