@@ -30,9 +30,12 @@ while ($fetch_specific_post = mysqli_fetch_assoc($get_specific_post)) {
 
 ///Updating/Editing POST...
 if (isset($_POST['update-post'])) {
-
     $post_title = $_POST['title'];
+    $post_title = mysqli_real_escape_string($connection, $post_title);
+
     $post_author = $_POST['author'];
+    $post_author = mysqli_real_escape_string($connection, $post_author);
+
     $post_status = $_POST['status'];
     $post_category_id = $_POST['category-select'];
 
@@ -40,7 +43,10 @@ if (isset($_POST['update-post'])) {
     $post_image_temp = $_FILES['image']['tmp_name'];
 
     $post_tag = $_POST['tags'];
+
     $post_content = $_POST['content'];
+    $post_content = mysqli_real_escape_string($connection, $post_content);
+
     $post_comment_count = 4;
 
     //Make Local Image to our  project/Application here...
@@ -77,7 +83,6 @@ if (isset($_POST['update-post'])) {
         die("GET ERR! when try to make query for specific post to update in Admin " . mysqli_error($connection));
     }
 }
-
 ?>
 
 <!-- HTML for Update/Edit Items here... -->

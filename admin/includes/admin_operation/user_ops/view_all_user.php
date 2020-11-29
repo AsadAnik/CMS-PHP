@@ -112,14 +112,17 @@
                             </td>
 
                             <!-- Actions -->
+                            <!---- PHP for Edit Admin/Subscriber ---->
+                            <?php include "edit_user_type.php"; ?>
+
                             <!-- Make Admin -->
                             <td>
-                                <a href="" class="btn btn-success btn-xs">Admin</a>
+                                <a href="users.php?edit_admin_type&admin_id=<?php echo $users_id;?>" class="btn btn-success btn-xs">Admin</a>
                             </td>
 
                             <!-- Make Subscriber/Member -->
                             <td>
-                                <a href="" class="btn btn-warning btn-xs">Subscriber</a>
+                                <a href="users.php?edit_subscriber_type&subscriber_id=<?php echo $users_id;?>" class="btn btn-warning btn-xs">Subscriber</a>
                             </td>
 
                             <!-- EDIT Action -->

@@ -11,6 +11,11 @@
     // }else{
     //     header("location: ../index.php");
     // }
+
+    ///Checking the Users Type here..
+    if(!isset($_SESSION['usertype'])){
+       header("Location: ../index.php");
+    }
 ?>
 
 <!DOCTYPE html>

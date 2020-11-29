@@ -2,7 +2,11 @@
 ///Code With PHP...
     if(isset($_POST['publish-post'])){
         $post_title = $_POST['title'];
+        $post_title = mysqli_real_escape_string($connection, $post_title);
+
         $post_author = $_POST['author'];
+        $post_author = mysqli_real_escape_string($connection, $post_author);
+
         $post_category_id = $_POST['category-id'];
         $post_status = $_POST['status'];
         
@@ -11,7 +15,10 @@
 
         // $post_date = date('d-m-y');
         $post_tag = $_POST['tags'];
+
         $post_content = $_POST['content'];
+        $post_content = mysqli_real_escape_string($connection, $post_content);
+        
         $post_comment_count = 4;
 
         //Make Local Image to our  project/Application here...

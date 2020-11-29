@@ -30,6 +30,26 @@ if (!$all_category) {
         <!-- /.input-group -->
     </div>
 
+    <!-- Login Section -->
+    <div class="well">
+        <h4>User Login</h4>
+
+        <form action="includes/login.php" method="post">
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Username.." class="form-control">
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+
+            <!-- Login Button -->
+            <input type="submit" value="Login" name="login" class="btn btn-info form-control">
+        </form>
+        <!-- /.input-group -->
+    </div>
+
     <!-- Blog Categories Well -->
     <div class="well">
         <h4>Blog Categories</h4>
