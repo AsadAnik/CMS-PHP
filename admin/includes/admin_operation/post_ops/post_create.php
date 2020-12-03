@@ -140,7 +140,11 @@
                 <!-- Status -->
                 <div class="form-group">
                     <label for="status">Post Status</label>
-                    <input type="text" class="form-control" placeholder="Status" name="status">
+                    <select name="status" class="form-control">
+                        <option value="draft">Select Status Post Type</option>
+                        <option value="published">Publish</option>
+                        <option value="draft">Draft</option>
+                    </select>
                 </div>
 
                 <!-- Image -->

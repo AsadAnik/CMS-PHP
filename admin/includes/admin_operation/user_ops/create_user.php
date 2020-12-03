@@ -21,7 +21,7 @@ if (isset($_POST['publish-post'])) {
         if ($password !== $re_password) {
             echo "<h4 class='text-cente text-danger'>Must Need Fill All Forms!</h4>";
         }
-        
+
         //Make Local Image to our  project/Application here...
         ///Way to upload Image/Files...
         move_uploaded_file($user_image_temp, "../images/profile_img/$user_image");
@@ -83,6 +83,10 @@ if (isset($_POST['publish-post'])) {
             die("GET ERROR! when try to make query to INSERT posts data to database!" . mysqli_error($connection));
         }
 
+        //After Creating the user...
+        echo "<div class='alert alert-primary' role='alert'>
+        Created Successfully! <a href='users.php' class='alert-link'>Lets Check All Users.</a></div>";
+
     } else {
         echo "<h3 class='text-cente text-danger'>Must Need Fill All Forms!</h3>";
     }
@@ -93,7 +97,7 @@ if (isset($_POST['publish-post'])) {
 <h1 class="page-header">
     Users
     <small>Account Create</small>
-    <a href="users.php" class="btn btn-warning">Users Control Center</a>
+    <!-- <a href="users.php" class="btn btn-warning">Users Control Center</a> -->
 </h1>
 
 <!-- Add Categories HTML -->

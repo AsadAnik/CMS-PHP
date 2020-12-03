@@ -35,9 +35,7 @@ if (!$select_all_posts) {
                 $post_status = $posts['post_status'];
 
                 ///Checking The Status And Then Viewing The Post...
-                if ($post_status !== 'published') {
-                    echo "<h1 class='text-danger text-center'>No Post Are Published!</h1>";
-                } else {
+                if ($post_status == 'published') {
             ?>
                     <h2>
                         <a href="post.php?postId=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
@@ -53,6 +51,8 @@ if (!$select_all_posts) {
                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                     <hr>
             <?php
+                }else if(!$post_id){
+                    echo "<h1 class='text-center text-danger'>No Posts Area Available!</h1>";
                 }
             } ?>
 

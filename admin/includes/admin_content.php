@@ -15,6 +15,13 @@ check_error($result_post_d, "Get ERR! when try to make query on dashboard of adm
 //lets counting the posts how many..
 $post_counts_draft = mysqli_num_rows($result_post_d);
 
+//Active Posts...
+$query_post_a = "SELECT * FROM `posts` WHERE `post_status` = 'published'";
+$result_post_a = mysqli_query($connection, $query_post_a);
+check_error($result_post_a, "Get ERR! when try to make query on dashboard of admin ", $connection);
+//lets counting..
+$post_counts_active = mysqli_num_rows($result_post_a);
+
 ///All Commnents..
 $query_comments = "SELECT * FROM `comments`";
 $result_comment = mysqli_query($connection, $query_comments);
@@ -181,8 +188,8 @@ function check_error($statement, $msg, $connection)
                             ['Data', 'Count'],
                             <?php
                             ///To All Things showing inside of google chart...
-                            $element_header = ['Posts', 'Draft Posts', 'Comments', 'Upapproved Comments', 'Users', 'Subscribers', 'Categoris'];
-                            $element_count = [$post_counts, $post_counts_draft, $comment_counts, $comment_counts_upapproved, $user_counts, $user_counts_type, $category_counts];
+                            $element_header = ['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Upapproved Comments', 'Users', 'Subscribers', 'Categoris'];
+                            $element_count = [$post_counts, $post_counts_active, $post_counts_draft, $comment_counts, $comment_counts_upapproved, $user_counts, $user_counts_type, $category_counts];
                             $element_amount = count($element_header);
 
                             //Loop throw inside for array make sattle..
