@@ -82,6 +82,15 @@ if (isset($_POST['update-post'])) {
     if (!$update_post_now) {
         die("GET ERR! when try to make query for specific post to update in Admin " . mysqli_error($connection));
     }
+
+    ///When Updated Successfully Done Then Return this message..
+?>
+    <div class="bg-warning text-center" style="padding: 10px; border-radius: 5px;">
+        <span>Post Updated Successfully</span>
+        <span> | </span>
+        <a href="posts.php">View All Posts!</a>
+    </div>
+<?php
 }
 ?>
 
@@ -89,7 +98,6 @@ if (isset($_POST['update-post'])) {
 <h1 class="page-header">
     Post
     <small>Editing</small>
-    <a href="posts.php" class="btn btn-primary">View All Posts</a>
 </h1>
 
 <!-- Add Categories HTML -->
@@ -116,7 +124,7 @@ if (isset($_POST['update-post'])) {
                     <label for="category-select">Category Select</label>
                     <br>
                     <select name="category-select" class="form-control">
-                            <option value="0">Select Category To Update</option>
+                        <option value="0">Select Category To Update</option>
                         <?php
                         //Categories Needs To View All From categories Table...
                         $query_cat = "SELECT * FROM `categories`";
@@ -142,13 +150,13 @@ if (isset($_POST['update-post'])) {
                 <div class="form-group">
                     <label for="status">Post Status</label>
                     <select name="status" class="form-control">
-                        <option value="<?php echo $post_status ;?>"><?php echo $post_status ;?></option>
+                        <option value="<?php echo $post_status; ?>"><?php echo $post_status; ?></option>
                         <?php
-                            if($post_status == 'published'){
-                                echo "<option value='draft'>Draft</option>";
-                            }else{
-                                echo "<option value='published'>Publish</option>";
-                            }
+                        if ($post_status == 'published') {
+                            echo "<option value='draft'>Draft</option>";
+                        } else {
+                            echo "<option value='published'>Publish</option>";
+                        }
                         ?>
                     </select>
                 </div>

@@ -8,7 +8,7 @@
         $comment = $_POST['comments_content'];
 
         //Checking the values of commenting...
-        if ($author !== '' && $email !== '' && $comment !== '') {
+        if (!empty($author) && !empty($email) && !empty($comment)) {
             $query = "INSERT INTO `comments` (comments_post_id ,comments_author, comments_date, comments_email, comments_content, comments_status) ";
             $query .= "VALUES ({$post_id} ,'{$author}', now(), '{$email}', '{$comment}', 'unapproved')";
             $comments_query = mysqli_query($connection, $query);

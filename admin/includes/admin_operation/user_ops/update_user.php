@@ -64,15 +64,22 @@ if (isset($_POST['update-user'])) {
     if (!$result_of_query) {
         die("Get ERR! when try to query on Update Users on edit_user section " . mysqli_error($connection));
     }
-}
 
+    ///Send Message when updated user..
+?>
+    <div class="bg-success text-center" style="padding: 10px; border-radius: 5px;">
+        <span>Update User Successfull</span>
+        <span> | </span>
+        <a href="users.php">View All Users!</a>
+    </div>
+<?php
+}
 ?>
 
 <!-- Lets Creating the template here -->
 <h1 class="page-header">
     Users
     <small>Account Edit/Update</small>
-    <a href="users.php" class="btn btn-warning">Users Control Center</a>
 </h1>
 
 <!-- Add Categories HTML -->
@@ -151,20 +158,20 @@ if (isset($_POST['update-user'])) {
                         <div class="form-group">
                             <label for="gender">Choose Gender</label>
                             <select name="gender" class="form-control">
-                                <option value="<?php echo $users_gender;?>"><?php echo $users_gender;?></option>
+                                <option value="<?php echo $users_gender; ?>"><?php echo $users_gender; ?></option>
                                 <?php
-                                    if($users_gender === 'Male'){
-                                        echo "<option value='Female'>Female</option>";
-                                        echo "<option value='Other'>Other</option>";
-                                    }
-                                    if($users_gender === 'Female'){
-                                        echo "<option value='Male'>Male</option>";
-                                        echo "<option value='Other'>Other</option>";
-                                    }
-                                    if($users_gender === 'Other'){
-                                        echo "<option value='Male'>Male</option>";
-                                        echo "<option value='Female'>Female</option>";
-                                    }
+                                if ($users_gender === 'Male') {
+                                    echo "<option value='Female'>Female</option>";
+                                    echo "<option value='Other'>Other</option>";
+                                }
+                                if ($users_gender === 'Female') {
+                                    echo "<option value='Male'>Male</option>";
+                                    echo "<option value='Other'>Other</option>";
+                                }
+                                if ($users_gender === 'Other') {
+                                    echo "<option value='Male'>Male</option>";
+                                    echo "<option value='Female'>Female</option>";
+                                }
                                 ?>
                             </select>
                         </div>
@@ -183,14 +190,14 @@ if (isset($_POST['update-user'])) {
                 <div class="form-group">
                     <label for="type">Type Of User</label>
                     <select name="type" class="form-control">
-                    <option value="<?php echo $users_type;?>"><?php echo $users_type;?></option>
+                        <option value="<?php echo $users_type; ?>"><?php echo $users_type; ?></option>
                         <?php
-                            if($users_type === 'admin'){
-                                echo "<option value='subscriber'>Subscriber</>";
-                            }
-                            if($users_type === 'subscriber'){
-                                echo "<option value='admin'>Admin</option>";
-                            }
+                        if ($users_type === 'admin') {
+                            echo "<option value='subscriber'>Subscriber</>";
+                        }
+                        if ($users_type === 'subscriber') {
+                            echo "<option value='admin'>Admin</option>";
+                        }
                         ?>
                     </select>
                 </div>

@@ -42,12 +42,12 @@ if (isset($_SESSION['username'])) {
     <div class="col-xs-3" style="margin-left: 20%;">
         <?php
         //If there is any profile-img (From Users Database)...
-        if ($db_profile_img !== '') {
-            echo "<img src='../images/profile_img/$db_profile_img;' alt='No-Profile-Avatar' class='img img-thumbnail' style='width: 235px; height: 250px; border-radius: 100%;'>";
+        if (!empty($db_profile_img)) {
+            echo "<img src='../images/profile_img/{$db_profile_img}' alt='No-Profile-Avatar' class='img img-thumbnail' style='width: 235px; height: 250px; border-radius: 100%;'>";
         }
 
         //If there is no any profile-img..
-        if ($db_profile_img == '') {
+        if (empty($db_profile_img)) {
             //Male profile..
             if ($db_gender == 'Male') {
                 echo "<img src='../images/profile_img/default/male.png' alt='No-Profile-Avatar' class='img img-thumbnail' style='width: 235px; height: 250px; border-radius: 100%;'>";

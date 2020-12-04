@@ -1,6 +1,5 @@
 <?php 
 ///Code...
-
 //Lets Starting the session to make all session of logout mod..
 session_start();
 

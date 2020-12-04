@@ -84,10 +84,19 @@
         if(!$make_query){
             die("GET ERROR! when try to make query to INSERT posts data to database!".mysqli_error($connection));
         }
-      
+
+    ///when created the post then return this message..
+?>
+    <div class="bg-success text-center" style="padding: 10px; border-radius: 5px;">
+        <span>Post Created Successfully</span>
+        <span> | </span>
+        <a href="posts.php">View All Posts!</a>
+    </div> 
+<?php
     }
 ?>
 
+<!------- Template HTML ------->
 <h1 class="page-header">
     Posts
     <small>Adding</small>

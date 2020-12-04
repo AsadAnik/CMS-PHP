@@ -83,12 +83,17 @@ if (isset($_POST['publish-post'])) {
             die("GET ERROR! when try to make query to INSERT posts data to database!" . mysqli_error($connection));
         }
 
-        //After Creating the user...
-        echo "<div class='alert alert-primary' role='alert'>
-        Created Successfully! <a href='users.php' class='alert-link'>Lets Check All Users.</a></div>";
+    ///After Creating the user...
+?>
+    <div class="bg-success text-center" style="padding: 10px; border-radius: 5px;">
+        <span>User Created Successfully</span>
+        <span> | </span>
+        <a href="users.php">View All Users!</a>
+    </div>
+<?php
 
     } else {
-        echo "<h3 class='text-cente text-danger'>Must Need Fill All Forms!</h3>";
+        echo "<h3 class='text-center text-danger'>Must Need Fill All Forms!</h3>";
     }
 }
 ?>

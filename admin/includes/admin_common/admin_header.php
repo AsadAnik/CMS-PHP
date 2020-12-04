@@ -47,6 +47,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- JQuery -->
+    <script src="js/jquery.js"></script>
+
     <!-- Google Charts for Dashboard of user Admin page -->
     <!-- Online CDN -->
     <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
@@ -60,6 +63,9 @@
     <script src="js/tiny.mce.js"></script>
     <!-- Configuring TinyMCE -->
     <script src="js/tiny.scripts.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
 
 </head>
 
