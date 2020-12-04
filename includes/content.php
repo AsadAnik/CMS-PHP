@@ -37,21 +37,34 @@ if (!$select_all_posts) {
                 ///Checking The Status And Then Viewing The Post...
                 if ($post_status == 'published') {
             ?>
+                    <!-- Title Of Post -->
                     <h2>
                         <a href="post.php?postId=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
                     </h2>
+
+                    <!-- AuthorName Of Post -->
                     <p class="lead">
                         by <a href="index.php"><?php echo $post_author; ?></a>
                     </p>
+
+                    <!-- Date Of Post -->
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
                     <hr>
-                    <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
+
+                    <!-- Image Of Post -->
+                    <a href="post.php?postId=<?php echo $post_id; ?>">
+                        <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
+                    </a>
                     <hr>
+
+                    <!-- Post Content -->
                     <p><?php echo $post_content; ?></p>
-                    <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                    <!-- Read More Button of Post -->
+                    <a class="btn btn-primary" href="post.php?postId=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                     <hr>
             <?php
-                }else if(!$post_id){
+                } else if (!$post_id) {
                     echo "<h1 class='text-center text-danger'>No Posts Area Available!</h1>";
                 }
             } ?>

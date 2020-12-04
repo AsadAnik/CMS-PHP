@@ -35,6 +35,20 @@
                     }
                 ?>
                 <li><a href="admin/index.php" class="text-capitalize">admin panel</a></li>
+
+                <?php 
+                ///PHP Code...
+                    //Lets Starting the session here..
+                    session_start();
+
+                    //Lets checking the usestype from session login user then make operation...
+                    if(isset($_SESSION['usertype'])){
+                        if(isset($_GET['postId'])){
+                            $postId = $_GET['postId'];
+                            echo "<li><a href='admin/posts.php?source=update_post&editId={$postId}'>EDIT POST</a></li>";
+                        }
+                    }
+                ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

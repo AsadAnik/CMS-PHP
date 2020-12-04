@@ -53,6 +53,14 @@
     <!-- Offline Resource -->
     <script src="js/google.chart.js"></script>
 
+    <!-- Word Editor Textarea TinyMCE -->
+    <!-- Online CDN -->
+    <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
+    <!-- Offline CDN -->
+    <script src="js/tiny.mce.js"></script>
+    <!-- Configuring TinyMCE -->
+    <script src="js/tiny.scripts.js"></script>
+
 </head>
 
 <body>
