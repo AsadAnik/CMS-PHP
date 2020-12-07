@@ -15,7 +15,7 @@ if (isset($_POST['checkboxValues'])) {
                 check_error($approve_result, $connection, "ERR! when try to query with query ");
             break;
 
-            case "unapprove":
+            case "unapproved":
                 $query_unapprove = "UPDATE `comments` SET `comments_status` = '{$select_check_option}' WHERE `comments_id` = {$checked_id}";
                 $approve_result = mysqli_query($connection, $query_unapprove);
                 //checkup errors in query...
@@ -58,7 +58,7 @@ function check_error($result, $connection, $msg)
                 <select class="form-control" name="selects-bulk-option">
                     <option value="">Select Options</option>
                     <option value="approve">Approve</option>
-                    <option value="unapprove">Unapprove</option>
+                    <option value="unapproved">Unapprove</option>
                     <option value="delete">Delete</option>
                 </select>
             </div>

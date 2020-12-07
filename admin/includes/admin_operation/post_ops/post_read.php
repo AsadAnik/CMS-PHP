@@ -121,7 +121,6 @@ function check_up_query($query_ready, $connection, $query_message){
                             <!-- Checkbox Input to Select Posts -->
                             <td><input class="checkboxes" type="checkbox" name="checkBoxValues[]" value="<?php echo $post_id; ?>"></td>
 
-
                             <!-- Id -->
                             <td><?php echo $post_id; ?></td>
 
