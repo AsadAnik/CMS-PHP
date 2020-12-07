@@ -8,26 +8,26 @@ if (isset($_POST['checkboxValues'])) {
         $select_check_option = $_POST['selects-bulk-option'];
 
         switch ($select_check_option) {
-            case "approve":
+            case "approved":
                 $query_approve = "UPDATE `comments` SET `comments_status` = '{$select_check_option}' WHERE `comments_id` = {$checked_id}";
                 $approve_result = mysqli_query($connection, $query_approve);
                 //checkup errors in query...
                 check_error($approve_result, $connection, "ERR! when try to query with query ");
-            break;
+                break;
 
             case "unapproved":
                 $query_unapprove = "UPDATE `comments` SET `comments_status` = '{$select_check_option}' WHERE `comments_id` = {$checked_id}";
                 $approve_result = mysqli_query($connection, $query_unapprove);
                 //checkup errors in query...
                 check_error($approve_result, $connection, "ERR! when try to query with query ");
-            break;
+                break;
 
             case "delete":
                 $query_delete = "DELETE FROM `comments` WHERE `comments_id` = {$checked_id}";
                 $delete_result = mysqli_query($connection, $query_delete);
                 //checkup errors in query of delete..
                 check_error($delete_result, $connection, "Delete Comments Multiple checkup has ERR! ");
-            break;
+                break;
         }
     }
 }
@@ -57,7 +57,7 @@ function check_error($result, $connection, $msg)
             <div id="bulkOptionContainer" class="col-xs-4">
                 <select class="form-control" name="selects-bulk-option">
                     <option value="">Select Options</option>
-                    <option value="approve">Approve</option>
+                    <option value="approved">Approve</option>
                     <option value="unapproved">Unapprove</option>
                     <option value="delete">Delete</option>
                 </select>
