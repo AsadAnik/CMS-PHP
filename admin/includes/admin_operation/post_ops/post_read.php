@@ -29,6 +29,31 @@ if (isset($_POST['checkBoxValues'])) {
                 //checking anykinds of error on query..
                 check_up_query($result_delete_query, $connection, "GET ERR! when try to make query in select options Posts Admin Panel ReadPosts Section ");
                 break;
+
+            case "clone":
+                $query = "SELECT * FROM `posts` WHERE `post_id` = {$check_out_id}";
+                $result_all = mysqli_query($connection, $query);
+
+                //Fetching all posts items from Database..
+                while ($fetch_posts = mysqli_fetch_assoc($result_all)) {
+                    $post_title = $fetch_posts['post_title'];
+                    $post_author = $fetch_posts['post_author'];
+                    $post_date = $fetch_posts['post_date'];
+                    $post_image = $fetch_posts['post_image'];
+                    $post_category_id = $fetch_posts['post_category_id'];
+                    $post_tags = $fetch_posts['post_tags'];
+                    $post_content = $fetch_posts['post_content'];
+                    $post_status = $fetch_posts['post_status'];
+                    $post_comment_count = $fetch_posts['post_comment_count'];
+                } 
+
+                ///INSERTING into Database to Cloning Post...
+                $insert_query = "INSERT INTO `posts` (post_category_id, post_title, post_author, post_date, post_image, post_tags, post_content, post_status, post_comment_count) ";
+                $insert_query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}','{$post_tags}' ,'{$post_content}', '{$post_status}', '{$post_comment_count}')";
+
+                $insert_result = mysqli_query($connection, $insert_query);
+                check_up_query($insert_result, $connection, "ERR! when query into insert clone seleced for posts all view ");
+                break;
         }
     }
 }
@@ -62,6 +87,7 @@ function check_up_query($query_ready, $connection, $query_message)
                     <option value="published">Publish</option>
                     <option value="draft">Draft</option>
                     <option value="delete">Delete</option>
+                    <option value="clone">Clone</option>
                 </select>
             </div>
 
@@ -98,7 +124,7 @@ function check_up_query($query_ready, $connection, $query_message)
                 <tbody>
                     <!------- Makes View All Posts from database fetching ------->
                     <?php
-                    $query = "SELECT * FROM `posts`";
+                    $query = "SELECT * FROM `posts` ORDER BY `post_id` DESC";
                     $view_all_posts = mysqli_query($connection, $query);
 
                     //Checking the Query...

@@ -1,6 +1,13 @@
 <?php
+///Code...
+//Checking Author and post id to collect related post of specific author..
+if ($_GET['postId']) {
+    $post_related_id = $_GET['postId'];
+    $related_author = $_GET['author'];
+}
+
 ///Select All From Database here..
-$query = "SELECT * FROM `posts`";
+$query = "SELECT * FROM `posts` WHERE `post_author` = '{$related_author}'";
 $select_all_posts = mysqli_query($connection, $query);
 
 //Checking the Query in Content...
@@ -17,8 +24,8 @@ if (!$select_all_posts) {
         <div class="col-md-8">
 
             <h1 class="page-header">
-                Home 
-                <small>All Posts View</small>
+                All Posts Of
+                <small><?php echo $related_author; ?></small>
             </h1>
 
             <!-- First Blog Post -->
@@ -41,11 +48,6 @@ if (!$select_all_posts) {
                     <h2>
                         <a href="post.php?postId=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
                     </h2>
-
-                    <!-- AuthorName Of Post -->
-                    <p class="lead">
-                        by <a href="author_post.php?postId=<?php echo $post_id; ?>&author=<?php echo $post_author; ?>"><?php echo $post_author; ?></a>
-                    </p>
 
                     <!-- Date Of Post -->
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
