@@ -31,23 +31,61 @@ if (!$all_category) {
     </div>
 
     <!-- Login Section -->
-    <div class="well">
-        <h4>User Login</h4>
+    <div class="well text-center">
+        <!-- Login button -->
+        <?php
+        if (!isset($_SESSION['usertype'])) {
+            echo "<a href='login.php' class='btn btn-success form-control'>Login User!</a>";
+        } else {
+        ?>
+            <!-- Profile Shows When is in Logged-In -->
+            <h3>
+                <!-- Users Profile Avatar -->
+                <?php
+                $profile_avatar = $_SESSION['profile-img'];
+                $users_gender = $_SESSION['gender'];
 
-        <form action="includes/login.php" method="post">
-            <div class="form-group">
-                <input type="text" name="username" placeholder="Username.." class="form-control">
-            </div>
+                //If there is any profile-img (From Users Database)...
+                if (!empty($profile_avatar)) {
+                    echo "<img src='images/profile_img/{$profile_avatar}' alt='No-Profile-Avatar' width='45' height='45' style='border-radius: 100%;'>";
+                }
 
-            <!-- Password -->
-            <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Password">
-            </div>
+                //If there is no any profile-img..
+                if (empty($profile_avatar)) {
+                    //Male profile..
+                    if ($users_gender == 'Male') {
+                        echo "<img src='images/profile_img/default/male.png' alt='No-Profile-Avatar' width='45' height='45' style='border-radius: 100%;'>";
+                    }
+                    //Female profile..
+                    if ($users_gender == 'Female') {
+                        echo "<img src='images/profile_img/default/female.jpeg' alt='No-Profile-Avatar' width='45' height='45' style='border-radius: 100%;'>";
+                    }
+                    //Other profile..
+                    if ($users_gender == 'Other') {
+                        echo "<img src='images/profile_img/default/other.png' alt='No-Profile-Avatar' width='45' height='45' style='border-radius: 100%;'>";
+                    }
+                }
+                ?>
 
-            <!-- Login Button -->
-            <input type="submit" value="Login" name="login" class="btn btn-info form-control">
-        </form>
-        <!-- /.input-group -->
+                <!-- FirstName & LastName -->
+                <span><?php echo $_SESSION['firstname']; ?></span>
+                <span> </span>
+                <span><?php echo $_SESSION['lastname']; ?></span>
+
+                <!-- Username -->
+                <small>(<?php echo $_SESSION['username']; ?>)</small>
+            </h3>
+
+            <!-- Logout Link -->
+            <a href="includes/logout.php">Logout</a>
+        <?php
+        }
+        ?>
+
+        <hr>
+
+        <!-- Registration from Here -->
+        <a href="registration.php" class="btn btn-primary form-control">Register Now</a>
     </div>
 
     <!-- Blog Categories Well -->

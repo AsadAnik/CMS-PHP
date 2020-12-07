@@ -1,5 +1,7 @@
 <?php
 ///Code With PHP...
+$password_match_message = "";
+
 if (isset($_POST['publish-post'])) {
     $username = $_POST['username'];
     $firstname = $_POST['firstname'];
@@ -17,81 +19,96 @@ if (isset($_POST['publish-post'])) {
     $gender = $_POST['gender'];
 
     ///Checking the Blanks to Send User Data to Database..
-    if ($username !== '' && $firstname !== '' && $email !== '' && $password !== '' && $gender !== '' && $age !== '') {
+    if (!empty($username) && !empty($firstname) && !empty($email) && !empty($password) && !empty($age)) {
         if ($password !== $re_password) {
-            echo "<h4 class='text-cente text-danger'>Must Need Fill All Forms!</h4>";
-        }
+            $password_match_message = "Password is not matched!";
+        } else {
 
-        //Make Local Image to our  project/Application here...
-        ///Way to upload Image/Files...
-        move_uploaded_file($user_image_temp, "../images/profile_img/$user_image");
+            //Make Local Image to our  project/Application here...
+            ///Way to upload Image/Files...
+            move_uploaded_file($user_image_temp, "../images/profile_img/$user_image");
 
-        ///Another Way to Upload Files With Deept...
-        ///Making Operation for Image Uploading...
-        //Creating File Uploading System with PHP..
-        // $file = $_FILES['profile-img'];
+            ///Another Way to Upload Files With Deept...
+            ///Making Operation for Image Uploading...
+            //Creating File Uploading System with PHP..
+            // $file = $_FILES['profile-img'];
 
-        // $file_name = $file['name'];
-        // $file_temp = $file['tmp_name'];
-        // $file_type = $file['type'];
-        // $file_size = $file['size'];
-        // $file_error = $file['error'];
+            // $file_name = $file['name'];
+            // $file_temp = $file['tmp_name'];
+            // $file_type = $file['type'];
+            // $file_size = $file['size'];
+            // $file_error = $file['error'];
 
-        // // print_r($file);
+            // // print_r($file);
 
-        // //Do Ops here..
-        // $file_extension = explode('.', $file_name);
-        // $real_extension = strtolower(end($file_extension));
+            // //Do Ops here..
+            // $file_extension = explode('.', $file_name);
+            // $real_extension = strtolower(end($file_extension));
 
-        // //Allowing Format of File to upload...
-        // $allowable = array('jpg', 'png', 'jpeg');
+            // //Allowing Format of File to upload...
+            // $allowable = array('jpg', 'png', 'jpeg');
 
-        // ///Decition making now...
-        // if (in_array($real_extension, $allowable)) {
-        //     if ($file_error === 0) {
-        //         if ($file_size < 1000000) {
+            // ///Decition making now...
+            // if (in_array($real_extension, $allowable)) {
+            //     if ($file_error === 0) {
+            //         if ($file_size < 1000000) {
 
-        //             $file_name_new = uniqid('', true) . "." . $real_extension;
-        //             $file_destination = '../images/profile_img/' . $file_name_new;
+            //             $file_name_new = uniqid('', true) . "." . $real_extension;
+            //             $file_destination = '../images/profile_img/' . $file_name_new;
 
-        //             //Move FIle to Local Temporary storage to server...
-        //             move_uploaded_file($file_temp, $file_destination);
+            //             //Move FIle to Local Temporary storage to server...
+            //             move_uploaded_file($file_temp, $file_destination);
 
-        //             //make redirect with header..
-        //             header("Location: posts.php?source=add_post");
-        //         } else {
-        //             echo "Your File is too Big!";
-        //         }
-        //     } else {
-        //         echo "There is an ERR! when try to Fetch Files";
-        //     }
-        // } else {
-        //     echo "You can not upload files of this type";
-        // }
+            //             //make redirect with header..
+            //             header("Location: posts.php?source=add_post");
+            //         } else {
+            //             echo "Your File is too Big!";
+            //         }
+            //     } else {
+            //         echo "There is an ERR! when try to Fetch Files";
+            //     }
+            // } else {
+            //     echo "You can not upload files of this type";
+            // }
 
 
-        ///INSERTING into the DATABASE...
-        $query = "INSERT INTO `users` (`users_name`, `users_firstname`, `users_lastname`, `users_email`, `users_password`, `users_image`, `users_age`, `users_gender`, `users_date`, `users_type`) ";
+            ///Encrypting Users Password..
+            $salt_db = "SELECT 'randSalt' FROM `users`";
+            $result_salt = mysqli_query($connection, $salt_db);
 
-        $query .= "VALUES ('{$username}', '{$firstname}', '{$lastname}', '{$email}', '{$password}', '{$user_image}', '{$age}', '{$gender}', now(), '{$type}')";
+            if (!$result_salt) {
+                die("ERR! when try to query for randSalt of users DB " . mysqli_error($connection));
+            }
 
-        //Make query for all data to submit on database..
-        $make_query = mysqli_query($connection, $query);
+            //Fetching Salt from DB & Crypt Password..
+            $fetch_salt = mysqli_fetch_array($result_salt);
+            $randSalt = $fetch_salt['randSalt'];
+            $hash_password = crypt($password, $randSalt);
 
-        ///Checking query...
-        if (!$make_query) {
-            die("GET ERROR! when try to make query to INSERT posts data to database!" . mysqli_error($connection));
-        }
 
-    ///After Creating the user...
+            ///INSERTING into the DATABASE...
+            $query = "INSERT INTO `users` (`users_name`, `users_firstname`, `users_lastname`, `users_email`, `users_password`, `users_image`, `users_age`, `users_gender`, `users_date`, `users_type`) ";
+
+            $query .= "VALUES ('{$username}', '{$firstname}', '{$lastname}', '{$email}', '{$hash_password}', '{$user_image}', '{$age}', '{$gender}', now(), '{$type}')";
+
+            //Make query for all data to submit on database..
+            $make_query = mysqli_query($connection, $query);
+
+            ///Checking query...
+            if (!$make_query) {
+                die("GET ERROR! when try to make query to INSERT posts data to database!" . mysqli_error($connection));
+            }
+
+            ///After Creating the user...
 ?>
-    <div class="bg-success text-center" style="padding: 10px; border-radius: 5px;">
-        <span>User Created Successfully</span>
-        <span> | </span>
-        <a href="users.php">View All Users!</a>
-    </div>
+            <div class="bg-success text-center" style="padding: 10px; border-radius: 5px;">
+                <span>User Created Successfully</span>
+                <span> | </span>
+                <a href="users.php">View All Users!</a>
+            </div>
 <?php
 
+        }
     } else {
         echo "<h3 class='text-center text-danger'>Must Need Fill All Forms!</h3>";
     }
@@ -110,7 +127,7 @@ if (isset($_POST['publish-post'])) {
     <div class="row">
         <!-- Add Category Column -->
         <div class="col-xs-12">
-            <form action="users.php?source=create_user" method="POST" enctype="multipart/form-data">
+            <form action="users.php?source=create_user" method="POST" enctype="multipart/form-data" autocomplete="off">
 
                 <!-- FirstName & LastName -->
                 <div class="row">
@@ -151,6 +168,11 @@ if (isset($_POST['publish-post'])) {
 
                 <!-- Password & ReType Password -->
                 <div class="row">
+                    <!-- Showing Password Match Message -->
+                    <h5 class="text-danger text-center">
+                        <?php echo $password_match_message; ?>
+                    </h5>
+
                     <!-- Password -->
                     <div class="col-xs-6">
                         <div class="form-group">

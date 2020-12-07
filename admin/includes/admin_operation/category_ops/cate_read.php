@@ -30,7 +30,7 @@ if (!$all_cate) {
                 <td><?php echo $cate_id; ?></td>
                 <td><?php echo $cate_title; ?></td>
                 <td>
-                    <a href="category.php?deleteId=<?php echo $cate_id; ?>" class="btn btn-xs btn-danger">DELETE</a>
+                    <a href="category.php?deleteId=<?php echo $cate_id; ?>" onclick="javascript: return confirm('Sure to delete this category?');" class="btn btn-xs btn-danger">DELETE</a>
 
                     <a href="category.php?edit=<?php echo $cate_id; ?>" class="btn btn-xs btn-primary">EDIT</a>
                 </td>

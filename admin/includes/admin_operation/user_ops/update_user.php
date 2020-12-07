@@ -44,6 +44,21 @@ if (isset($_POST['update-user'])) {
     $gender = $_POST['gender'];
     $type = $_POST['type'];
 
+    
+    ///Encrypting Users Password..
+    $salt_db = "SELECT 'randSalt' FROM `users`";
+    $result_salt = mysqli_query($connection, $salt_db);
+
+    if(!$result_salt){
+        die("ERR! when try to query for randSalt of users DB ".mysqli_error($connection));
+    }
+
+    //Fetching Salt from DB & Crypt Password..
+    $fetch_salt = mysqli_fetch_array($result_salt);
+    $randSalt = $fetch_salt['randSalt'];
+    $hash_password = crypt($password, $randSalt);
+
+
     ///lets doing some query here...
     $query = "UPDATE `users` SET ";
     $query .= "`users_name` = '{$username}', ";
@@ -51,7 +66,7 @@ if (isset($_POST['update-user'])) {
     $query .= "`users_lastname` = '{$lastname}', ";
     $query .= "`users_image` = '{$profile_img}', ";
     $query .= "`users_email` = '{$email}', ";
-    $query .= "`users_password` = '{$password}', ";
+    $query .= "`users_password` = '{$hash_password}', ";
     $query .= "`users_email` = '{$email}', ";
     $query .= "`users_age` = '{$age}', ";
     $query .= "`users_gender` = '{$gender}', ";

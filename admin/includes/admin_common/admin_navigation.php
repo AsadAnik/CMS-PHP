@@ -48,7 +48,31 @@
             <!-- Profile Name and Profile Image Avatar -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- Profile Avatar -->
-                <img src="../images/profile_img/<?php echo $_SESSION['profile-img']; ?>" alt="No-Profile-Avatar" class="img" width="25" height="25" style="border-radius: 100%; margin-left: 10px; margin-right: 5px;">
+                <?php
+                $profile_avatar = $_SESSION['profile-img'];
+                $users_gender = $_SESSION['gender'];
+
+                //If there is any profile-img (From Users Database)...
+                if (!empty($profile_avatar)) {
+                    echo "<img src='../images/profile_img/{$profile_avatar}' alt='No-Profile-Avatar' class='img' width='25' height='25' style='border-radius: 100%; margin-left: 10px; margin-right: 5px;'>";
+                }
+
+                //If there is no any profile-img..
+                if (empty($profile_avatar)) {
+                    //Male profile..
+                    if ($users_gender == 'Male') {
+                        echo "<img src='../images/profile_img/default/male.png' alt='No-Profile-Avatar' class='img' width='25' height='25' style='border-radius: 100%; margin-left: 10px; margin-right: 5px;'>";
+                    }
+                    //Female profile..
+                    if ($users_gender == 'Female') {
+                        echo "<img src='../images/profile_img/default/female.jpeg' alt='No-Profile-Avatar' class='img' width='25' height='25' style='border-radius: 100%; margin-left: 10px; margin-right: 5px;'>";
+                    }
+                    //Other profile..
+                    if ($users_gender == 'Other') {
+                        echo "<img src='../images/profile_img/default/other.png' alt='No-Profile-Avatar' class='img' width='25' height='25' style='border-radius: 100%; margin-left: 10px; margin-right: 5px;'>";
+                    }
+                }
+                ?>
 
                 <!-- Profile Name -->
                 <span><?php echo $_SESSION['firstname'] . " " . $_SESSION['lastname']; ?></span>
@@ -75,7 +99,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li>
-                <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
 
             <li>

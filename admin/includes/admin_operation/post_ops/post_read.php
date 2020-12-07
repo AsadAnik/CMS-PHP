@@ -14,21 +14,21 @@ if (isset($_POST['checkBoxValues'])) {
                 $result_published_query = mysqli_query($connection, $publish_query);
                 //checkup errors in query..
                 check_up_query($result_published_query, $connection, "GET ERR! when try to make query in select options Posts Admin Panel ReadPosts Section ");
-                break;
+            break;
 
             case "draft":
                 $draft_query = "UPDATE `posts` SET `post_status` = '{$select_bulk_option}' WHERE `post_id` = {$check_out_id}";
                 $result_draft_query = mysqli_query($connection, $draft_query);
                 //Checking Errors when make query..
                 check_up_query($result_draft_query, $connection, "GET ERR! when try to make query in select options Posts Admin Panel ReadPosts Section ");
-                break;
+            break;
 
             case "delete":
                 $delete_query = "DELETE FROM `posts` WHERE `post_id` = {$check_out_id}";
                 $result_delete_query = mysqli_query($connection, $delete_query);
                 //checking anykinds of error on query..
                 check_up_query($result_delete_query, $connection, "GET ERR! when try to make query in select options Posts Admin Panel ReadPosts Section ");
-                break;
+            break;
         }
     }
 }
@@ -41,6 +41,7 @@ function check_up_query($query_ready, $connection, $query_message){
 }
 ?>
 
+<!-- HTML -->
 <!-- Page For Posts -->
 <h1 class="page-header">
     Posts
@@ -174,7 +175,7 @@ function check_up_query($query_ready, $connection, $query_message){
                             <td>
                                 <!-- Make Post DELETE from here -->
                                 <?php include "post_delete.php"; ?>
-                                <a href="posts.php?deleteId=<?php echo $post_id; ?>" name="post-delete-btn" class="btn btn-xs btn-danger">DELETE</a>
+                                <a href="posts.php?deleteId=<?php echo $post_id; ?>" onclick="javascript: return confirm('Are you sure wants to delete this post?');" name="post-delete-btn" class="btn btn-xs btn-danger">DELETE</a>
                             </td>
                         </tr>
                     <?php

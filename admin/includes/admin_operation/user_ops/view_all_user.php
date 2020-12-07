@@ -134,7 +134,7 @@
                             <!-- DELETE Action -->
                             <td>
                                 <!-- Make Users DELETE from here -->
-                                <a href="users.php?deleteUserId=<?php echo $users_id; ?>" class="btn btn-xs btn-danger">DELETE</a>
+                                <a href="users.php?deleteUserId=<?php echo $users_id; ?>" onclick="javascript: return confirm('Are you sure wants to delete?');" class="btn btn-xs btn-danger">DELETE</a>
                                 <!-- Delete PHP Code.. -->
                                 <?php include "delete_user.php"; ?>
                             </td>
