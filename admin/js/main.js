@@ -14,7 +14,7 @@ $(document).ready(function(){
         }
     });
 
-    ///Loader Of Admin page...
+    ///Loader Of Admin Panel...
     var loader = "<div id='load-screen'><div id='loading'></div></div>";
     $("body").prepend(loader);
 

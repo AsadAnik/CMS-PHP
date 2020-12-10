@@ -42,14 +42,18 @@ if (isset($_POST['checkBoxValues'])) {
                     $post_image = $fetch_posts['post_image'];
                     $post_category_id = $fetch_posts['post_category_id'];
                     $post_tags = $fetch_posts['post_tags'];
+
                     $post_content = $fetch_posts['post_content'];
+                    $post_content = mysqli_real_escape_string($connection, $post_content);
+
                     $post_status = $fetch_posts['post_status'];
                     $post_comment_count = $fetch_posts['post_comment_count'];
+                    $post_views_count = $fetch_posts['post_views_count'];
                 } 
 
                 ///INSERTING into Database to Cloning Post...
-                $insert_query = "INSERT INTO `posts` (post_category_id, post_title, post_author, post_date, post_image, post_tags, post_content, post_status, post_comment_count) ";
-                $insert_query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}','{$post_tags}' ,'{$post_content}', '{$post_status}', '{$post_comment_count}')";
+                $insert_query = "INSERT INTO `posts` (post_category_id, post_title, post_author, post_date, post_image, post_tags, post_content, post_status, post_comment_count, post_views_count) ";
+                $insert_query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}','{$post_tags}' ,'{$post_content}', '{$post_status}', '{$post_comment_count}', {$post_views_count})";
 
                 $insert_result = mysqli_query($connection, $insert_query);
                 check_up_query($insert_result, $connection, "ERR! when query into insert clone seleced for posts all view ");
@@ -66,6 +70,7 @@ function check_up_query($query_ready, $connection, $query_message)
     }
 }
 ?>
+
 
 <!-- HTML -->
 <!-- Page For Posts -->
@@ -114,9 +119,10 @@ function check_up_query($query_ready, $connection, $query_message)
                         <th>Status</th>
                         <th>Image</th>
                         <th>Tags</th>
+                        <th>Views</th>
                         <th>Comments</th>
                         <th>Date</th>
-                        <th colspan="2">Operation</th>
+                        <th colspan="3">Operation</th>
                     </tr>
                 </thead>
 
@@ -143,6 +149,7 @@ function check_up_query($query_ready, $connection, $query_message)
                         $post_tags = $fetch_all_post['post_tags'];
                         $post_status = $fetch_all_post['post_status'];
                         $post_comment_count = $fetch_all_post['post_comment_count'];
+                        $post_views_count = $fetch_all_post['post_views_count'];
                     ?>
                         <tr>
                             <!-- Checkbox Input to Select Posts -->
@@ -185,6 +192,9 @@ function check_up_query($query_ready, $connection, $query_message)
                             <!-- Tags -->
                             <td><?php echo $post_tags; ?></td>
 
+                            <!-- Post Views -->
+                            <td><?php echo $post_views_count; ?></td>
+
                             <!-- Comments Count -->
                             <td><?php echo $post_comment_count; ?></td>
 
@@ -201,7 +211,14 @@ function check_up_query($query_ready, $connection, $query_message)
                             <td>
                                 <!-- Make Post DELETE from here -->
                                 <?php include "post_delete.php"; ?>
-                                <a href="posts.php?deleteId=<?php echo $post_id; ?>" onclick="javascript: return confirm('Are you sure wants to delete this post?');" name="post-delete-btn" class="btn btn-xs btn-danger">DELETE</a>
+                                <a href="posts.php?deleteId=<?php echo $post_id; ?>" onclick="javascript: return confirm('Are you sure wants to delete this post?');" class="btn btn-xs btn-danger">DELETE</a>
+                            </td>
+
+                            <!-- Reset Post Views -->
+                            <td>
+                                <!-- Reseting Post View -->
+                                <?php include "post_reset.php"; ?>
+                                <a href="posts.php?resetId=<?php echo $post_id; ?>" onclick="javascript: return confirm('Sure you wants to resetting this post views?');" class="btn btn-xs btn-warning">Reset Views</a>
                             </td>
                         </tr>
                     <?php

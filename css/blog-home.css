@@ -11,3 +11,14 @@ body {
 footer {
     margin: 50px 0;
 }
+
+/** Customizing CSS here **/
+
+.pager li a.active-page{
+    background: black !important;
+    color: white !important;
+}
+
+.nav li .active-link{
+    color: white !important;
+}

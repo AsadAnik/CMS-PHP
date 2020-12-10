@@ -1,12 +1,43 @@
 <?php
+
+//Assigning per page items number..
+$per_page = 2;
+
+///Posts Counts here All posts..
+$count_query = "SELECT * FROM `posts` WHERE `post_status` = 'published'";
+$count_query_result = mysqli_query($connection, $count_query);
+$count_posts = mysqli_num_rows($count_query_result);
+$per_posts = ceil($count_posts / $per_page);
+// echo "Posts are : ".$count_posts;
+
+///Checking Page No. To Pagination checkup..
+//Controlling Page of Pagination on Home of each Page..
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+
+}else{
+    $page = "";
+}
+
+if($page == "" || $page == 1){
+    $page_1 = 0;
+
+}else{
+    $page_1 = ($page * $per_page) - $per_page;
+}
+
+// echo "Selected Page [".$page."]";
+
+
 ///Select All From Database here..
-$query = "SELECT * FROM `posts`";
+$query = "SELECT * FROM `posts` LIMIT {$page_1}, 2";
 $select_all_posts = mysqli_query($connection, $query);
 
 //Checking the Query in Content...
 if (!$select_all_posts) {
     die("ERROR When get query in Content " . mysqli_error($connection));
 }
+
 ?>
 
 <!-- Page Content -->
@@ -18,7 +49,7 @@ if (!$select_all_posts) {
 
             <h1 class="page-header">
                 Home 
-                <small>All Posts View</small>
+                <small>All Published <?php echo $count_posts;?> Posts</small>
             </h1>
 
             <!-- First Blog Post -->
@@ -33,6 +64,7 @@ if (!$select_all_posts) {
                 $post_image = $posts['post_image'];
                 $post_content = substr($posts['post_content'], 0, 200);
                 $post_status = $posts['post_status'];
+                $post_view_counts = $posts['post_views_count'];
 
                 ///Checking The Status And Then Viewing The Post...
                 if ($post_status == 'published') {
@@ -71,12 +103,20 @@ if (!$select_all_posts) {
 
             <!-- Pager -->
             <ul class="pager">
-                <li class="previous">
-                    <a href="#">&larr; Older</a>
-                </li>
-                <li class="next">
-                    <a href="#">Newer &rarr;</a>
-                </li>
+                <!-- Paginating Page Links -->
+                <?php 
+                ///code..
+                    for($i = 1; $i <= $per_posts; $i++){
+                        if($i == $page){
+                ?>  
+                            <li><a class="active-page" href="index.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+
+                        <?php }else{ ?>
+
+                            <li><a href="index.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                <?php
+                     } }
+                ?>
             </ul>
 
         </div>
