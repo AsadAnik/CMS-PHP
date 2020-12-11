@@ -1,3 +1,8 @@
+<!-- User Check Online -->
+ <?php include "includes/online_user/online.check.user.php"; ?>
+
+
+<!-- Navigation HTML -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -12,10 +17,21 @@
 
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
+        <!-- Online Users Count -->
+        <li class="text-capitalize">
+            <a href="#">
+                <span><?php echo $online_users_count; ?></span>
+                <span> :</span>
+                <span>Users are online</span>
+            </a>
+        </li>
+
+        <!-- Goto Home site (Frontend Section) -->
         <li>
             <a href="../index.php" class="text-uppercase">Home site</a>
         </li>
 
+        <!-- Admin User Section -->
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
             <ul class="dropdown-menu alert-dropdown">

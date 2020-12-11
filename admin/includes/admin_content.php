@@ -187,9 +187,12 @@ function check_error($statement, $msg, $connection)
                         var data = google.visualization.arrayToDataTable([
                             ['Data', 'Count'],
                             <?php
+                            ///Importing Online Users..
+                            include "includes/online_user/online.check.user.php";
+
                             ///To All Things showing inside of google chart...
-                            $element_header = ['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Upapproved Comments', 'Users', 'Subscribers', 'Categoris'];
-                            $element_count = [$post_counts, $post_counts_active, $post_counts_draft, $comment_counts, $comment_counts_upapproved, $user_counts, $user_counts_type, $category_counts];
+                            $element_header = ['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Upapproved Comments', 'Users' ,'Online Users' , 'Subscribers', 'Categoris'];
+                            $element_count = [$post_counts, $post_counts_active, $post_counts_draft, $comment_counts, $comment_counts_upapproved, $user_counts ,$online_users_count , $user_counts_type, $category_counts];
                             $element_amount = count($element_header);
 
                             //Loop throw inside for array make sattle..
