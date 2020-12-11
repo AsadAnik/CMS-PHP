@@ -30,7 +30,7 @@ if($page == "" || $page == 1){
 
 
 ///Select All From Database here..
-$query = "SELECT * FROM `posts` LIMIT {$page_1}, 2";
+$query = "SELECT * FROM `posts` LIMIT {$page_1}, {$per_page}";
 $select_all_posts = mysqli_query($connection, $query);
 
 //Checking the Query in Content...
