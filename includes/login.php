@@ -32,22 +32,23 @@ if (isset($_POST['login'])) {
 
     ///Selecting salt...
     //Querying Salt from Database and Encrypting Password..
-    $salt_query = "SELECT 'randSalt' FROM `users`";
-    $salt_query_result = mysqli_query($connection, $salt_query);
+    // $salt_query = "SELECT 'randSalt' FROM `users`";
+    // $salt_query_result = mysqli_query($connection, $salt_query);
 
     //checking query from here..
-    if (!$salt_query_result) {
-        die("Get Err! When Try to Register On FrontEnd for randSalt " . mysqli_error($connection));
-    }
+    // if (!$salt_query_result) {
+    //     die("Get Err! When Try to Register On FrontEnd for randSalt " . mysqli_error($connection));
+    // }
 
     //Fetching the randsalt from database...
-    $fetch_randSalt = mysqli_fetch_array($salt_query_result);
-    $randSalt = $fetch_randSalt['randSalt'];
+    // $fetch_randSalt = mysqli_fetch_array($salt_query_result);
+    // $randSalt = $fetch_randSalt['randSalt'];
     //Making Password Crypt..
-    $password = crypt($password, $randSalt);
+    // $password = crypt($password, $randSalt);
+
 
     ///Validating User Now...
-    if ($username === $db_username && $password === $db_password) {
+    if ($username === $db_username && password_verify($password, $db_password)) {
         //storing into session here..
         $_SESSION['user-id'] = $db_userid;
         $_SESSION['username'] = $db_username;

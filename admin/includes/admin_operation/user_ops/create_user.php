@@ -72,18 +72,23 @@ if (isset($_POST['publish-post'])) {
             // }
 
 
-            ///Encrypting Users Password..
-            $salt_db = "SELECT 'randSalt' FROM `users`";
-            $result_salt = mysqli_query($connection, $salt_db);
 
-            if (!$result_salt) {
-                die("ERR! when try to query for randSalt of users DB " . mysqli_error($connection));
-            }
+            ///Encrypting Users Password..
+            // $salt_db = "SELECT 'randSalt' FROM `users`";
+            // $result_salt = mysqli_query($connection, $salt_db);
+
+            // if (!$result_salt) {
+            //     die("ERR! when try to query for randSalt of users DB " . mysqli_error($connection));
+            // }
 
             //Fetching Salt from DB & Crypt Password..
-            $fetch_salt = mysqli_fetch_array($result_salt);
-            $randSalt = $fetch_salt['randSalt'];
-            $hash_password = crypt($password, $randSalt);
+            // $fetch_salt = mysqli_fetch_array($result_salt);
+            // $randSalt = $fetch_salt['randSalt'];
+            // $hash_password = crypt($password, $randSalt);
+
+            ///Salt_hashing password security new way...
+            //password hashing new security way..
+            $hash_password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
 
             ///INSERTING into the DATABASE...

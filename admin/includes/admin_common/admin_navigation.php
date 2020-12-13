@@ -21,6 +21,9 @@
         <li class="text-capitalize">
             <a href="#">
                 <span><?php echo $online_users_count; ?></span>
+
+                <!-- Authomatic Online Users Active System -->
+                <!-- <span class="active-online-user"></span> -->
                 <span> :</span>
                 <span>Users are online</span>
             </a>

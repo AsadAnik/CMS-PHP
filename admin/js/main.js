@@ -21,4 +21,17 @@ $(document).ready(function(){
     $('#load-screen').delay(700).fadeOut(600, function(){
         $(this).remove();
     });
+
+
+    ///Online Autoload Users Visibility...
+    ///Optional Feature..
+    // function activeOnlineUsers(){
+    //     $.get("online.check.user.php?activeusers?result", function(result){
+    //         $('.active-online-user').text(result);
+    //     });
+    // }
+
+    // setInterval(function(){
+    //     activeOnlineUsers();
+    // }, 500);
 });
