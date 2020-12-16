@@ -20,14 +20,9 @@
 
             //Counting Comments When Make Sent Comments...
             ///Make comments_counting...
-            $counts_query = "UPDATE `posts` SET post_comment_count = post_comment_count + 1 ";
-            $counts_query .= "WHERE `post_id` = {$post_id}";
-            $posts_update = mysqli_query($connection, $counts_query);
-
-            ///Checking query here...
-            if (!$posts_update) {
-                die("Get ERR! when try to make query in posts comments_count " . mysqli_error($connection));
-            }
+            // $counts_query = "UPDATE `posts` SET post_comment_count = post_comment_count + 1 ";
+            // $counts_query .= "WHERE `post_id` = {$post_id}";
+            // $posts_update = mysqli_query($connection, $counts_query);
         }
     }
 ?>

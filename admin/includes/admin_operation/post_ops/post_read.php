@@ -49,7 +49,7 @@ if (isset($_POST['checkBoxValues'])) {
                     $post_status = $fetch_posts['post_status'];
                     $post_comment_count = $fetch_posts['post_comment_count'];
                     $post_views_count = $fetch_posts['post_views_count'];
-                } 
+                }
 
                 ///INSERTING into Database to Cloning Post...
                 $insert_query = "INSERT INTO `posts` (post_category_id, post_title, post_author, post_date, post_image, post_tags, post_content, post_status, post_comment_count, post_views_count) ";
@@ -193,10 +193,20 @@ function check_up_query($query_ready, $connection, $query_message)
                             <td><?php echo $post_tags; ?></td>
 
                             <!-- Post Views -->
-                            <td><?php echo $post_views_count; ?></td>
+                            <td class="text-center"><?php echo $post_views_count; ?></td>
 
                             <!-- Comments Count -->
-                            <td><?php echo $post_comment_count; ?></td>
+                            <?php
+                            ///Code..
+                            //Counting the Comments from the rows of all post id related comments..
+                            $comments_query = "SELECT * FROM `comments` WHERE `comments_post_id` = {$post_id}";
+                            $result_comments_query = mysqli_query($connection, $comments_query);
+                            $count_comments = mysqli_num_rows($result_comments_query);
+                            ?>
+
+                            <td class="text-center">
+                                <a href="comments.php?specificId=<?php echo $post_id; ?>"><?php echo $count_comments; ?></a>
+                            </td>
 
                             <!-- Date -->
                             <td><?php echo $post_date; ?></td>

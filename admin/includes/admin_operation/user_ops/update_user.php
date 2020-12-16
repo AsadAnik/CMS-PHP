@@ -46,18 +46,22 @@ if (isset($_POST['update-user'])) {
 
     
     ///Encrypting Users Password..
-    $salt_db = "SELECT 'randSalt' FROM `users`";
-    $result_salt = mysqli_query($connection, $salt_db);
+    // $salt_db = "SELECT 'randSalt' FROM `users`";
+    // $result_salt = mysqli_query($connection, $salt_db);
 
-    if(!$result_salt){
-        die("ERR! when try to query for randSalt of users DB ".mysqli_error($connection));
-    }
+    // if(!$result_salt){
+    //     die("ERR! when try to query for randSalt of users DB ".mysqli_error($connection));
+    // }
 
     //Fetching Salt from DB & Crypt Password..
-    $fetch_salt = mysqli_fetch_array($result_salt);
-    $randSalt = $fetch_salt['randSalt'];
-    $hash_password = crypt($password, $randSalt);
+    // $fetch_salt = mysqli_fetch_array($result_salt);
+    // $randSalt = $fetch_salt['randSalt'];
+    // $hash_password = crypt($password, $randSalt);
 
+
+    ///making hash password update way and more secure..
+    $hash_password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+    
 
     ///lets doing some query here...
     $query = "UPDATE `users` SET ";
@@ -153,7 +157,7 @@ if (isset($_POST['update-user'])) {
                     <div class="col-xs-6">
                         <div class="form-group">
                             <label for="password">Change Password</label>
-                            <input type="password" class="form-control" name="password" placeholder="###" value="<?php echo $users_password; ?>">
+                            <input type="password" class="form-control" name="password" placeholder="###">
                         </div>
                     </div>
 
@@ -161,7 +165,7 @@ if (isset($_POST['update-user'])) {
                     <div class="col-xs-6">
                         <div class="form-group">
                             <label for="password">Retype Password</label>
-                            <input type="password" class="form-control" name="re-password" placeholder="###" value="<?php echo $users_password; ?>">
+                            <input type="password" class="form-control" name="re-password" placeholder="###">
                         </div>
                     </div>
                 </div>

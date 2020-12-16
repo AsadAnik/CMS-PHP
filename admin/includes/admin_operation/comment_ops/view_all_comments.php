@@ -94,98 +94,125 @@ function check_error($result, $connection, $msg)
                 <tbody>
                     <!------- Makes View All Posts from database fetching ------->
                     <?php
-                    $query = "SELECT * FROM `comments`";
-                    $view_all_comments = mysqli_query($connection, $query);
+                    if (isset($_GET['specificId'])) {
+                        $specific_id = $_GET['specificId'];
 
-                    //Checking the Query...
-                    if (!$view_all_comments) {
-                        die("ERR! when try to make query from posts view all");
+                        $query = "SELECT * FROM `comments` WHERE `comments_post_id`";
+                        $view_specific_comments = mysqli_query($connection, $query);
+
+                        //Checking the query..
+                        if (!$view_specific_comments) {
+                            die("ERR! when try to view specific comments here " . mysqli_error($connection));
+                        }
+
+                        //Give Value to function to showing the specific comments..
+                        comments_view($view_specific_comments);
+
+                    } else {
+                        $query = "SELECT * FROM `comments`";
+                        $view_all_comments = mysqli_query($connection, $query);
+
+                        //Checking the Query...
+                        if (!$view_all_comments) {
+                            die("ERR! when try to make query from posts view all");
+                        }
+
+                        //Give Value to function to showing all comments..
+                        comments_view($view_all_comments);
                     }
 
-                    ///Fetching the data from database here...
-                    while ($fetch_all_comment = mysqli_fetch_assoc($view_all_comments)) {
-                        $comments_id = $fetch_all_comment['comments_id'];
-                        $comments_post_id = $fetch_all_comment['comments_post_id'];
-                        $comments_author = $fetch_all_comment['comments_author'];
-                        $comments_date = $fetch_all_comment['comments_date'];
-                        $comments_email = $fetch_all_comment['comments_email'];
-                        $comments_content = $fetch_all_comment['comments_content'];
-                        $comments_status = $fetch_all_comment['comments_status'];
+
+                    ///Viewing function here..
+                    function comments_view($view_all_comments)
+                    {
+                        ///Fetching the data from database here...
+                        while ($fetch_all_comment = mysqli_fetch_assoc($view_all_comments)) {
+                            $comments_id = $fetch_all_comment['comments_id'];
+                            $comments_post_id = $fetch_all_comment['comments_post_id'];
+                            $comments_author = $fetch_all_comment['comments_author'];
+                            $comments_date = $fetch_all_comment['comments_date'];
+                            $comments_email = $fetch_all_comment['comments_email'];
+                            $comments_content = $fetch_all_comment['comments_content'];
+                            $comments_status = $fetch_all_comment['comments_status'];
                     ?>
-                        <tr>
-                            <!-- Checkbox for Select Option -->
-                            <td><input type="checkbox" class="checkboxes" name="checkboxValues[]" value="<?php echo $comments_id; ?>"></td>
+                            <tr>
+                                <!-- Checkbox for Select Option -->
+                                <td><input type="checkbox" class="checkboxes" name="checkboxValues[]" value="<?php echo $comments_id; ?>"></td>
 
-                            <!-- Comments ID -->
-                            <td><?php echo $comments_id; ?></td>
+                                <!-- Comments ID -->
+                                <td><?php echo $comments_id; ?></td>
 
-                            <!-- Author Comments -->
-                            <td><?php echo $comments_author; ?></td>
+                                <!-- Author Comments -->
+                                <td><?php echo $comments_author; ?></td>
 
-                            <!-- Content Comments -->
-                            <td><?php echo $comments_content; ?></td>
+                                <!-- Content Comments -->
+                                <td><?php echo $comments_content; ?></td>
 
-                            <!-- Comments Email -->
-                            <td>
-                                <?php echo $comments_email; ?>
-                            </td>
+                                <!-- Comments Email -->
+                                <td>
+                                    <?php echo $comments_email; ?>
+                                </td>
 
-                            <!-- Comments Status -->
-                            <td><?php echo $comments_status; ?></td>
+                                <!-- Comments Status -->
+                                <td><?php echo $comments_status; ?></td>
 
-                            <!-- Response Area -->
-                            <td>
-                                <?php
-                                $query_to_post = "SELECT * FROM `posts` WHERE `post_id` = {$comments_post_id}";
-                                $make_query_post = mysqli_query($connection, $query_to_post);
+                                <!-- Response Area -->
+                                <td>
+                                    <?php
+                                    //The Global Connection for Database..
+                                    global $connection;
 
-                                //Checking the query here..
-                                if (!$make_query_post) {
-                                    die("Get ERR! when try to query on posts to get on comments view all " . mysqli_error($connection));
-                                }
+                                    $query_to_post = "SELECT * FROM `posts` WHERE `post_id` = {$comments_post_id}";
+                                    $make_query_post = mysqli_query($connection, $query_to_post);
 
-                                //Fetching the Data..
-                                while ($fetch_post = mysqli_fetch_assoc($make_query_post)) {
-                                    $post_id = $fetch_post['post_id'];
-                                    $post_title = $fetch_post['post_title'];
-                                }
-                                ?>
-                                <a href="../post.php?postId=<?php echo $post_id; ?>">
-                                    <?php echo $post_title; ?>
-                                </a>
-                            </td>
+                                    //Checking the query here..
+                                    if (!$make_query_post) {
+                                        die("Get ERR! when try to query on posts to get on comments view all " . mysqli_error($connection));
+                                    }
 
-                            <!-- Comments Date -->
-                            <td><?php echo $comments_date; ?></td>
+                                    //Fetching the Data..
+                                    while ($fetch_post = mysqli_fetch_assoc($make_query_post)) {
+                                        $post_id = $fetch_post['post_id'];
+                                        $post_title = $fetch_post['post_title'];
+                                    }
+                                    ?>
+                                    <a href="../post.php?postId=<?php echo $post_id; ?>">
+                                        <?php echo $post_title; ?>
+                                    </a>
+                                </td>
 
-                            <!-- Approve Comments -->
-                            <td>
-                                <!-- Make Comment Update from here -->
-                                <a href="comments.php?approveId=<?php echo $comments_id; ?>" name="com-approve-btn" class="btn btn-xs btn-success">Approve</a>
+                                <!-- Comments Date -->
+                                <td><?php echo $comments_date; ?></td>
 
-                                <!-- PHP to make Approve from Admin -->
-                                <?php include "approval_update_comments.php"; ?>
-                            </td>
+                                <!-- Approve Comments -->
+                                <td>
+                                    <!-- Make Comment Update from here -->
+                                    <a href="comments.php?approveId=<?php echo $comments_id; ?>" name="com-approve-btn" class="btn btn-xs btn-success">Approve</a>
 
-                            <!-- Unapprove Comments -->
-                            <td>
-                                <!-- Make Comment Update from here -->
-                                <a href="comments.php?unapproveId=<?php echo $comments_id; ?>" name="com-unapprove-btn" class="btn btn-xs btn-warning">Unapprove</a>
+                                    <!-- PHP to make Approve from Admin -->
+                                    <?php include "approval_update_comments.php"; ?>
+                                </td>
 
-                                <!-- PHP to make Unapprove from Admin -->
-                                <?php include "approval_update_comments.php"; ?>
-                            </td>
+                                <!-- Unapprove Comments -->
+                                <td>
+                                    <!-- Make Comment Update from here -->
+                                    <a href="comments.php?unapproveId=<?php echo $comments_id; ?>" name="com-unapprove-btn" class="btn btn-xs btn-warning">Unapprove</a>
 
-                            <!-- Delete Comments -->
-                            <td>
-                                <!-- Make Comment DELETE from here -->
-                                <a href="comments.php?deleteId=<?php echo $comments_id; ?>" onclick="javascript: return confirm('Are you sure wants to delete this comment?');" name="com-delete-btn" class="btn btn-xs btn-danger">DELETE</a>
+                                    <!-- PHP to make Unapprove from Admin -->
+                                    <?php include "approval_update_comments.php"; ?>
+                                </td>
 
-                                <!-- Refer to PHP file to delete comments -->
-                                <?php include "delete_comments.php"; ?>
-                            </td>
-                        </tr>
+                                <!-- Delete Comments -->
+                                <td>
+                                    <!-- Make Comment DELETE from here -->
+                                    <a href="comments.php?deleteId=<?php echo $comments_id; ?>" onclick="javascript: return confirm('Are you sure wants to delete this comment?');" name="com-delete-btn" class="btn btn-xs btn-danger">DELETE</a>
+
+                                    <!-- Refer to PHP file to delete comments -->
+                                    <?php include "delete_comments.php"; ?>
+                                </td>
+                            </tr>
                     <?php
+                        }
                     }
                     ?>
 
