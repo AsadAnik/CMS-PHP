@@ -17,7 +17,7 @@ if (!$get_specific_post) {
 ///Looping To Fetch Data for all Form Value Adding Data...
 while ($fetch_specific_post = mysqli_fetch_assoc($get_specific_post)) {
     $post_title = $fetch_specific_post['post_title'];
-    $post_author = $fetch_specific_post['post_author'];
+    $post_user = $fetch_specific_post['post_user'];
     $post_date = $fetch_specific_post['post_date'];
     $post_image = $fetch_specific_post['post_image'];
     $post_category_id = $fetch_specific_post['post_category_id'];
@@ -33,8 +33,8 @@ if (isset($_POST['update-post'])) {
     $post_title = $_POST['title'];
     $post_title = mysqli_real_escape_string($connection, $post_title);
 
-    $post_author = $_POST['author'];
-    $post_author = mysqli_real_escape_string($connection, $post_author);
+    $post_user = $_POST['user'];
+    $post_user = mysqli_real_escape_string($connection, $post_user);
 
     $post_status = $_POST['status'];
     $post_category_id = $_POST['category-select'];
@@ -66,7 +66,7 @@ if (isset($_POST['update-post'])) {
     //Making Query here...
     $query = "UPDATE `posts` SET ";
     $query .= "`post_title` = '{$post_title}', ";
-    $query .= "`post_author` = '{$post_author}', ";
+    $query .= "`post_user` = '{$post_user}', ";
     $query .= "`post_category_id` = {$post_category_id}, ";
     $query .= "`post_date` = now(), ";
     $query .= "`post_status` = '{$post_status}', ";
@@ -113,10 +113,30 @@ if (isset($_POST['update-post'])) {
                     <input value="<?php echo $post_title; ?>" type="text" class="form-control" placeholder="Title" name="title">
                 </div>
 
-                <!-- Author -->
+                <!-- User -->
                 <div class="form-group">
                     <label for="author">Post Author</label>
-                    <input value="<?php echo $post_author; ?>" type="text" class="form-control" placeholder="Author" name="author">
+                    <select name="user" class="form-control">
+                        <option value="">Choose User</option>
+                        <?php
+                        ///Code...
+                        $users_query = "SELECT * FROM `users`";
+                        $query_result = mysqli_query($connection, $users_query);
+
+                        //Checking the query..
+                        if (!$query_result) {
+                            die("ERR! when try to make query posts all users " . mysqli_error($connection));
+                        }
+
+                        //fetching all users..
+                        while ($fetch_user = mysqli_fetch_assoc($query_result)) {
+                            $post_user = $fetch_user['users_name'];
+                        ?>
+                            <option value="<?php echo $post_user; ?>"><?php echo $post_user; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                 </div>
 
                 <!-- Categories -->

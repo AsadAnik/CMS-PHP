@@ -59,7 +59,7 @@ if (!$select_all_posts) {
             while ($posts = mysqli_fetch_assoc($select_all_posts)) {
                 $post_id = $posts['post_id'];
                 $post_title = $posts['post_title'];
-                $post_author = $posts['post_author'];
+                $post_user = $posts['post_user'];
                 $post_date = $posts['post_date'];
                 $post_image = $posts['post_image'];
                 $post_content = substr($posts['post_content'], 0, 200);
@@ -74,9 +74,9 @@ if (!$select_all_posts) {
                         <a href="post.php?postId=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
                     </h2>
 
-                    <!-- AuthorName Of Post -->
+                    <!-- User Of Post -->
                     <p class="lead">
-                        by <a href="author_post.php?postId=<?php echo $post_id; ?>&author=<?php echo $post_author; ?>"><?php echo $post_author; ?></a>
+                        by <a href="author_post.php?postId=<?php echo $post_id; ?>&author=<?php echo $post_user; ?>"><?php echo $post_user; ?></a>
                     </p>
 
                     <!-- Date Of Post -->

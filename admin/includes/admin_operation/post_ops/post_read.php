@@ -37,7 +37,7 @@ if (isset($_POST['checkBoxValues'])) {
                 //Fetching all posts items from Database..
                 while ($fetch_posts = mysqli_fetch_assoc($result_all)) {
                     $post_title = $fetch_posts['post_title'];
-                    $post_author = $fetch_posts['post_author'];
+                    $post_user = $fetch_posts['post_user'];
                     $post_date = $fetch_posts['post_date'];
                     $post_image = $fetch_posts['post_image'];
                     $post_category_id = $fetch_posts['post_category_id'];
@@ -52,8 +52,8 @@ if (isset($_POST['checkBoxValues'])) {
                 }
 
                 ///INSERTING into Database to Cloning Post...
-                $insert_query = "INSERT INTO `posts` (post_category_id, post_title, post_author, post_date, post_image, post_tags, post_content, post_status, post_comment_count, post_views_count) ";
-                $insert_query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}','{$post_tags}' ,'{$post_content}', '{$post_status}', '{$post_comment_count}', {$post_views_count})";
+                $insert_query = "INSERT INTO `posts` (post_category_id, post_title, post_user, post_date, post_image, post_tags, post_content, post_status, post_comment_count, post_views_count) ";
+                $insert_query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_user}', now(), '{$post_image}','{$post_tags}' ,'{$post_content}', '{$post_status}', '{$post_comment_count}', {$post_views_count})";
 
                 $insert_result = mysqli_query($connection, $insert_query);
                 check_up_query($insert_result, $connection, "ERR! when query into insert clone seleced for posts all view ");
@@ -113,7 +113,7 @@ function check_up_query($query_ready, $connection, $query_message)
                     <tr>
                         <th><input id="selectAllBoxes" type="checkbox" name="selectAllBoxes"></th>
                         <th>Id</th>
-                        <th>Author</th>
+                        <th>Users</th>
                         <th>Title</th>
                         <th>Category</th>
                         <th>Status</th>
@@ -142,7 +142,7 @@ function check_up_query($query_ready, $connection, $query_message)
                     while ($fetch_all_post = mysqli_fetch_assoc($view_all_posts)) {
                         $post_id = $fetch_all_post['post_id'];
                         $post_title = $fetch_all_post['post_title'];
-                        $post_author = $fetch_all_post['post_author'];
+                        $post_user = $fetch_all_post['post_user'];
                         $post_date = $fetch_all_post['post_date'];
                         $post_image = $fetch_all_post['post_image'];
                         $post_category_id = $fetch_all_post['post_category_id'];
@@ -158,8 +158,8 @@ function check_up_query($query_ready, $connection, $query_message)
                             <!-- Id -->
                             <td><?php echo $post_id; ?></td>
 
-                            <!-- Author -->
-                            <td><?php echo $post_author; ?></td>
+                            <!-- User -->
+                            <td><?php echo $post_user; ?></td>
 
                             <!-- Title -->
                             <td>

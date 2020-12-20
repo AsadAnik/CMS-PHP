@@ -97,7 +97,7 @@ function check_error($result, $connection, $msg)
                     if (isset($_GET['specificId'])) {
                         $specific_id = $_GET['specificId'];
 
-                        $query = "SELECT * FROM `comments` WHERE `comments_post_id`";
+                        $query = "SELECT * FROM `comments` WHERE `comments_post_id` = {$specific_id}";
                         $view_specific_comments = mysqli_query($connection, $query);
 
                         //Checking the query..
@@ -129,7 +129,7 @@ function check_error($result, $connection, $msg)
                         while ($fetch_all_comment = mysqli_fetch_assoc($view_all_comments)) {
                             $comments_id = $fetch_all_comment['comments_id'];
                             $comments_post_id = $fetch_all_comment['comments_post_id'];
-                            $comments_author = $fetch_all_comment['comments_author'];
+                            $comments_user = $fetch_all_comment['comments_user'];
                             $comments_date = $fetch_all_comment['comments_date'];
                             $comments_email = $fetch_all_comment['comments_email'];
                             $comments_content = $fetch_all_comment['comments_content'];
@@ -143,7 +143,7 @@ function check_error($result, $connection, $msg)
                                 <td><?php echo $comments_id; ?></td>
 
                                 <!-- Author Comments -->
-                                <td><?php echo $comments_author; ?></td>
+                                <td><?php echo $comments_user; ?></td>
 
                                 <!-- Content Comments -->
                                 <td><?php echo $comments_content; ?></td>

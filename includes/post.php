@@ -25,7 +25,7 @@ if (isset($_GET['postId'])) {
     //Fetching Loop throw the data...
     while ($fetch_post_item = mysqli_fetch_assoc($result_query)) {
         $post_title = $fetch_post_item['post_title'];
-        $post_author = $fetch_post_item['post_author'];
+        $post_user = $fetch_post_item['post_user'];
         $post_date = $fetch_post_item['post_date'];
         $post_image = $fetch_post_item['post_image'];
         $post_content = $fetch_post_item['post_content'];
@@ -48,9 +48,9 @@ if (isset($_GET['postId'])) {
                 <?php echo $post_title; ?>
             </h1>
 
-            <!----- Author ---->
+            <!----- User ---->
             <p class="lead">
-                by <a href="#"><?php echo $post_author; ?></a>
+                by <a href="#"><?php echo $post_user; ?></a>
             </p>
 
             <hr>

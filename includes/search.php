@@ -35,7 +35,7 @@
                     ///PHP for Getting Contents Data from Database..
                     while ($posts = mysqli_fetch_assoc($search_query)) {
                         $post_title = $posts['post_title'];
-                        $post_author = $posts['post_author'];
+                        $post_user = $posts['post_user'];
                         $post_date = $posts['post_date'];
                         $post_image = $posts['post_image'];
                         $post_content = $posts['post_content'];
@@ -45,7 +45,7 @@
                             <a href="#"><?php echo $post_title; ?></a>
                         </h2>
                         <p class="lead">
-                            by <a href="index.php"><?php echo $post_author; ?></a>
+                            by <a href="index.php"><?php echo $post_user; ?></a>
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
                         <hr>

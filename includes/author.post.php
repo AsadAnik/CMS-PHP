@@ -7,7 +7,7 @@ if ($_GET['postId']) {
 }
 
 ///Select All From Database here..
-$query = "SELECT * FROM `posts` WHERE `post_author` = '{$related_author}'";
+$query = "SELECT * FROM `posts` WHERE `post_user` = '{$related_author}'";
 $select_all_posts = mysqli_query($connection, $query);
 
 //Checking the Query in Content...
@@ -35,7 +35,7 @@ if (!$select_all_posts) {
             while ($posts = mysqli_fetch_assoc($select_all_posts)) {
                 $post_id = $posts['post_id'];
                 $post_title = $posts['post_title'];
-                $post_author = $posts['post_author'];
+                $post_user = $posts['post_user'];
                 $post_date = $posts['post_date'];
                 $post_image = $posts['post_image'];
                 $post_content = substr($posts['post_content'], 0, 200);
