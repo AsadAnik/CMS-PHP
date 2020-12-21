@@ -1,24 +1,35 @@
 <?php
 ///Code..
 if (isset($_POST['send-contact'])) {
+    //Selecting the values...
     $email = $_POST['email'];
-    $title = $_POST['title'];
+    $title = $_POST['subject'];
     $content = $_POST['content'];
 
     //Setting Values to headers also..
     $to = "s.engineer63@gmail.com";
     $subject = wordwrap($content, 70);
     $body = $content;
-    $header = "From: " . $email;
+    // $header = "From: " . $email;
+
+    //Configuring to send mail from localhost local php server...
+    ini_set("SMTP", "aspmx.l.google.com");
+    ini_set("sendmail_from", $email);
+    $body = "The mail message was sent with the following mail setting:\r\nSMTP = aspmx.l.google.com\r\nsmtp_port = 25\r\nsendmail_from = " . $email;
+
+    ///Header to configuring and added somethings..
+    $header  = 'MIME-Version: 1.0' . "\r\n";
+    $header .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+    $header .= 'From: '.$email."\r\n";
 
     //Send With Mail Function PHP...
     $send_mail = mail($to, $subject, $body, $header);
 
     //Checking email sends here...
     if (!$send_mail) {
-        echo "There is problem with mail couldn't send it!";
+        echo "<h5 class='text-center text-danger'>There is problem with mail couldn't send it!</h5>";
     } else {
-        echo "Mail Sended Successfully!";
+        echo "<h5 class='text-center text-success'>Mail Sended Successfully!</h5>";
     }
 }
 ?>
@@ -38,7 +49,7 @@ if (isset($_POST['send-contact'])) {
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label for="to-email">To Us: </label>
-                                    <input type="email" class="form-control" name="email" value="s.engineer63@gmail.com" disabled>
+                                    <input type="email" class="form-control" name="toEmail" value="s.engineer63@gmail.com" disabled>
                                 </div>
                             </div>
 
