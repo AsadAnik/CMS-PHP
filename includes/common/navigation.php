@@ -34,7 +34,12 @@
                         echo "<li><a href='category.php?categoryId=$id_link'>$title_link</a></li>";
                     }
                 ?>
+                
+                <!-- Admin Panel Linking -->
                 <li><a href="admin/index.php" class="text-capitalize">admin panel</a></li>
+
+                <!-- Contact Us Page Linking -->
+                <li><a href="contact_us.php" class="text-capitalize">contact us</a></li>
 
                 <?php 
                 ///PHP Code...

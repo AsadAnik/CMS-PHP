@@ -16,8 +16,6 @@ if (isset($_GET['deleteUserId'])) {
                 die("Get ERR! when try to make query Delete Users from View All Users " . mysqli_error($connection));
             }
 
-        }else{
-            echo "You are Not an Admin to delete user!";
         }
     }
 }
