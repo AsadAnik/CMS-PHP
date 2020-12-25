@@ -1,4 +1,7 @@
 <?php
+    //Lets Starting the session here..
+    session_start();
+
     //Make Query with data..
     $query = "SELECT * FROM `categories`";
     $catagories_all_data = mysqli_query($connection, $query);
@@ -36,16 +39,18 @@
                 ?>
                 
                 <!-- Admin Panel Linking -->
-                <li><a href="admin/index.php" class="text-capitalize">admin panel</a></li>
+                <?php 
+                ///Code...
+                    if(isset($_SESSION['usertype'])){
+                        echo "<li><a href='admin/index.php' class='text-capitalize'>admin panel</a></li>";
+                    }
+                ?>
 
                 <!-- Contact Us Page Linking -->
                 <li><a href="contact_us.php" class="text-capitalize">contact us</a></li>
 
                 <?php 
                 ///PHP Code...
-                    //Lets Starting the session here..
-                    session_start();
-
                     //Lets checking the usestype from session login user then make operation...
                     if(isset($_SESSION['usertype'])){
                         if(isset($_GET['postId'])){
