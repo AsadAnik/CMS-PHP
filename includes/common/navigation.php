@@ -22,6 +22,7 @@
             </button>
             <a class="navbar-brand" href="index.php">CMS - Community</a>
         </div>
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -36,16 +37,20 @@
                 ?>
                 
                 <!-- Admin Panel Linking -->
-                <li><a href="admin/index.php" class="text-capitalize">admin panel</a></li>
+                <?php
+                    //Lets Starting the session here..
+                    session_start();
+
+                    // Let's see the user session..
+                    if (isset($_SESSION['usertype'])){
+                        echo "<li><a href='admin/index.php' class='text-capitalize'>admin panel</a></li>";
+                    }
+                ?>
 
                 <!-- Contact Us Page Linking -->
                 <li><a href="contact_us.php" class="text-capitalize">contact us</a></li>
 
                 <?php 
-                ///PHP Code...
-                    //Lets Starting the session here..
-                    session_start();
-
                     //Lets checking the usestype from session login user then make operation...
                     if(isset($_SESSION['usertype'])){
                         if(isset($_GET['postId'])){

@@ -1,12 +1,22 @@
 <?php
 
 //Assigning per page items number..
-$per_page = 2;
+$per_page = 3;
 
 ///Posts Counts here All posts..
 $count_query = "SELECT * FROM `posts` WHERE `post_status` = 'published'";
 $count_query_result = mysqli_query($connection, $count_query);
+
+if (!$count_query_result){
+    die("ERROR when try to make count_query_result in includes/content.php ". mysqli_error($connection));
+}
+
 $count_posts = mysqli_num_rows($count_query_result);
+
+if (!$count_posts){
+    die("ERROR when try to make count_posts in includes/content.php ". mysqli_error($connection));
+}
+
 $per_posts = ceil($count_posts / $per_page);
 // echo "Posts are : ".$count_posts;
 
@@ -30,7 +40,7 @@ if($page == "" || $page == 1){
 
 
 ///Select All From Database here..
-$query = "SELECT * FROM `posts` LIMIT {$page_1}, {$per_page}";
+$query = "SELECT * FROM `posts` ORDER BY `post_id` DESC LIMIT {$page_1}, {$per_page}";
 $select_all_posts = mysqli_query($connection, $query);
 
 //Checking the Query in Content...
