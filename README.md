@@ -1,4 +1,4 @@
-# Content Management System with PHP
+# Blog Content Management System with PHP
 
 I have created a sample with php for cms. Those who wish may take it and continue to develop themselves. <br>
 It is now at the basic level. <br>
