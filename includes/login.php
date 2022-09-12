@@ -59,7 +59,7 @@ if (isset($_POST['login'])) {
         $_SESSION['usertype'] = $db_type;
 
         //Redirecting to Admin Page..
-        header("Location: admin");
+        header("Location: index.php");
     } else {
         //Redirecting to Home Page..
         header("Location: index.php");

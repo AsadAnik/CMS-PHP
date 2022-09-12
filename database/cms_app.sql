@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 -- Database: `cms_app`
 --
 
+-- CREATE DATABASE `cms_app`;
+
 -- --------------------------------------------------------
 
 --

@@ -1,4 +1,7 @@
 <?php
+    //Lets Starting the session here..
+    session_start();
+
     //Make Query with data..
     $query = "SELECT * FROM `categories`";
     $catagories_all_data = mysqli_query($connection, $query);
@@ -37,12 +40,18 @@
                 ?>
                 
                 <!-- Admin Panel Linking -->
+<<<<<<< HEAD
                 <?php
                     //Lets Starting the session here..
                     session_start();
 
                     // Let's see the user session..
                     if (isset($_SESSION['usertype'])){
+=======
+                <?php 
+                ///Code...
+                    if(isset($_SESSION['usertype'])){
+>>>>>>> 0be682a0a464568d8b8fe162e7dc220574c5e66a
                         echo "<li><a href='admin/index.php' class='text-capitalize'>admin panel</a></li>";
                     }
                 ?>
@@ -51,6 +60,10 @@
                 <li><a href="contact_us.php" class="text-capitalize">contact us</a></li>
 
                 <?php 
+<<<<<<< HEAD
+=======
+                ///PHP Code...
+>>>>>>> 0be682a0a464568d8b8fe162e7dc220574c5e66a
                     //Lets checking the usestype from session login user then make operation...
                     if(isset($_SESSION['usertype'])){
                         if(isset($_GET['postId'])){
