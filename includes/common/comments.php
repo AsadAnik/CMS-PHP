@@ -3,7 +3,7 @@
     //Code To Create Comments from Here..
     if (isset($_POST['sent-comment'])) {
         $post_id = $_GET['postId'];
-        $author = $_POST['comments_author'];
+        $author = $_POST['comments_user'];
         $email = $_POST['comments_email'];
         $comment = $_POST['comments_content'];
 
